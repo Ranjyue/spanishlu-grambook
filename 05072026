@@ -1,0 +1,2127 @@
+# 📦 GramBook Repository 完整文件清單
+
+---
+
+## 📥 你需要的所有文件
+
+### **準備好的文件（由 Claude 生成）**
+
+這些文件已經完全準備好，你可以直接使用：
+
+| 文件 | 類型 | 用途 | 大小 | 操作 |
+|------|------|------|------|------|
+| `index.html` | HTML | 首頁 - 課程選擇 | ~8KB | 直接上傳 ✅ |
+| `README.md` | Markdown | 項目說明 | ~5KB | 直接上傳 ✅ |
+| `.gitignore` | 配置 | Git 忽略規則 | ~1KB | 直接上傳 ✅ |
+| `PASSWORD_TEMPLATE.html` | HTML | 密碼保護模板 | ~6KB | 參考文件 📖 |
+| `SETUP_GUIDE.md` | Markdown | 詳細設置指南 | ~12KB | 參考文件 📖 |
+| `QUICK_START.md` | Markdown | 快速開始 | ~6KB | 參考文件 📖 |
+| `FILES_CHECKLIST.md` | Markdown | 本清單 | ~5KB | 參考文件 📖 |
+
+**說明：**
+- ✅ = 直接上傳到 GitHub
+- 📖 = 參考/說明文件
+
+---
+
+## 🎯 你的課程文件（需要你準備）
+
+### **1. 西班牙語版本**
+
+| 文件位置 | 來源 | 用途 | 操作 |
+|---------|------|------|------|
+| `grambook/01-cumpleaños/es.html` | 你的課程 | 西班牙語課程 + 密碼保護 | 需要集成 ⚙️ |
+
+**來源：** 你之前創建的 `el_cumpleaños_grambook_interactivo.html`
+
+### **2. 中文版本**
+
+| 文件位置 | 來源 | 用途 | 操作 |
+|---------|------|------|------|
+| `grambook/01-cumpleaños/zh-tw.html` | 你的課程 | 中文繁體課程 + 密碼保護 | 需要集成 ⚙️ |
+
+**來源：** 你之前創建的 `el_cumpleaños_grambook_chino_interactivo.html`
+
+---
+
+## 🔧 如何集成你的課程文件
+
+### **方法 1：使用密碼模板（推薦）**
+
+#### 步驟 1：複製模板
+```
+複製 PASSWORD_TEMPLATE.html
+粘貼為 grambook/01-cumpleaños/es.html
+再粘貼為 grambook/01-cumpleaños/zh-tw.html
+```
+
+#### 步驟 2：添加西班牙語課程到 es.html
+
+打開 `es.html`，找到這一行：
+
+```html
+<!-- ========================================
+     請將你的完整 HTML 內容放在這裡
+     從 <!DOCTYPE html> 到 </html> 之間的所有內容
+     除了 <!DOCTYPE>, <html>, <head>, <body> 標籤
+     只需要放入 <body> 內部的所有內容
+     ======================================== -->
+```
+
+執行步驟：
+
+1. 打開 `el_cumpleaños_grambook_interactivo.html`
+2. 找到 `<div class="container">` 標籤
+3. 複製從 `<div class="container">` 到 `</footer>` 的所有內容
+4. 回到 `es.html`
+5. **完全替換**上述註釋部分（包括註釋）
+6. 保存
+
+**結果：** 
+```html
+<div id="content" class="hidden">
+    <div class="container">
+        <!-- 你的課程內容開始 -->
+        ...（所有課程 HTML）...
+        <!-- 你的課程內容結束 -->
+    </div>
+</div>
+```
+
+#### 步驟 3：添加中文課程到 zh-tw.html
+
+完全相同的步驟，只是使用 `el_cumpleaños_grambook_chino_interactivo.html`
+
+---
+
+### **方法 2：手動複製（如果方法 1 有問題）**
+
+1. **打開你的課程 HTML**
+2. **複製整個 `<body>` 標籤內的內容**
+3. **粘貼到密碼模板中**
+4. **確保 `<div id="content">` 包含所有內容**
+
+---
+
+## 📂 最終的文件結構
+
+部署到 GitHub 後，你的倉庫應該是這樣的：
+
+```
+spanishlu-grambook/
+│
+├── 📄 index.html                    ✅ 首頁
+├── 📄 README.md                     📖 說明文件
+├── 📄 SETUP_GUIDE.md                📖 詳細指南
+├── 📄 QUICK_START.md                📖 快速指南
+├── 📄 FILES_CHECKLIST.md            📖 本文件
+├── 📄 .gitignore                    ✅ Git 配置
+├── 📄 PASSWORD_TEMPLATE.html        📖 模板參考
+│
+└── 📁 grambook/
+    └── 📁 01-cumpleaños/
+        ├── 📄 es.html               ⚙️ 西班牙語課程（密碼保護）
+        └── 📄 zh-tw.html            ⚙️ 中文課程（密碼保護）
+```
+
+---
+
+## 📋 上傳到 GitHub 的步驟
+
+### 第 1 輪：上傳準備好的文件
+
+```
+直接上傳到 GitHub 根目錄：
+✅ index.html
+✅ README.md
+✅ .gitignore
+✅ PASSWORD_TEMPLATE.html （可選，作為參考）
+✅ SETUP_GUIDE.md
+✅ QUICK_START.md
+✅ FILES_CHECKLIST.md （本文件，可選）
+```
+
+### 第 2 輪：上傳課程文件
+
+```
+在 GitHub 中創建文件夾 grambook/01-cumpleaños/
+上傳：
+⚙️ es.html （集成了你的西班牙語課程 + 密碼保護）
+⚙️ zh-tw.html （集成了你的中文課程 + 密碼保護）
+```
+
+---
+
+## 🔐 密碼配置
+
+### 密碼位置
+
+在 `es.html` 和 `zh-tw.html` 中，找到：
+
+```javascript
+const CORRECT_PASSWORD = "YJL-95";
+```
+
+### 更改密碼
+
+1. 編輯文件中的這一行
+2. 將 `"YJL-95"` 改為你想要的密碼
+3. 保存
+4. Push 到 GitHub
+5. Cloudflare 自動更新
+
+**例如：**
+```javascript
+const CORRECT_PASSWORD = "NEWPASSWORD123";
+```
+
+---
+
+## 📐 文件大小參考
+
+| 文件 | 大小 | 載入時間 |
+|------|------|---------|
+| index.html | ~8 KB | < 1 秒 |
+| es.html（含課程） | ~100 KB | 1-2 秒 |
+| zh-tw.html（含課程） | ~100 KB | 1-2 秒 |
+| **總計** | **~200 KB** | **快速加載** ⚡ |
+
+---
+
+## 🔗 文件間的關係
+
+```
+使用者訪問：https://grambook.luzranjyue.com
+        ↓
+    加載 index.html（首頁）
+        ↓
+用戶點擊「西班牙語」或「中文」
+        ↓
+跳轉至 grambook/01-cumpleaños/es.html 或 zh-tw.html
+        ↓
+顯示密碼登入頁面
+        ↓
+用戶輸入密碼：YJL-95
+        ↓
+驗證通過，顯示課程內容
+        ↓
+用戶開始學習 ✅
+```
+
+---
+
+## 🚨 常見錯誤
+
+### ❌ 錯誤 1：密碼保護不工作
+
+**原因：** 課程內容放在了錯誤的位置
+
+**解決方案：**
+- 確保課程內容在 `<div id="content">` 中
+- 檢查是否有語法錯誤
+- 查看瀏覽器控制台（F12）的錯誤信息
+
+### ❌ 錯誤 2：課程樣式亂了
+
+**原因：** 可能是 CSS 衝突
+
+**解決方案：**
+- 檢查你的課程 HTML 是否有內聯樣式
+- 考慮將樣式移到 `<style>` 標籤中
+- 檢查是否有重複的 CSS 定義
+
+### ❌ 錯誤 3：按鈕不工作
+
+**原因：** JavaScript 衝突或路徑錯誤
+
+**解決方案：**
+- 確保沒有修改 `PASSWORD_TEMPLATE.html` 中的 JavaScript
+- 檢查課程中的 JavaScript 是否與密碼系統衝突
+- 檢查外部資源的路徑是否正確
+
+### ❌ 錯誤 4：字體或圖片無法加載
+
+**原因：** CDN 鏈接或相對路徑錯誤
+
+**解決方案：**
+- 使用 CDN 鏈接（Google Fonts, etc.）
+- 避免本地圖片，使用外部鏈接
+- 檢查 URL 是否使用了 HTTPS
+
+---
+
+## 🎓 文件用途說明
+
+### `index.html` - 首頁
+- 目的：讓使用者選擇課程
+- 包含：課程卡片、語言選擇按鈕
+- 鏈接到：`grambook/01-cumpleaños/es.html` 和 `zh-tw.html`
+- **不需要修改**
+
+### `es.html` 和 `zh-tw.html` - 課程頁面
+- 目的：顯示課程內容
+- 包含：密碼保護 + 課程內容
+- 需要集成：你的課程 HTML
+- **需要修改：添加課程內容**
+
+### `PASSWORD_TEMPLATE.html` - 模板
+- 目的：作為參考
+- 包含：密碼登入的完整代碼
+- 用於：複製到 `es.html` 和 `zh-tw.html`
+- **不需要上傳到主目錄**（除非作為備份）
+
+### `README.md` 等文檔
+- 目的：提供說明和文檔
+- 在 GitHub 上顯示為項目說明
+- **不需要修改**（除非想自定義）
+
+---
+
+## ✅ 驗收清單
+
+上傳前檢查：
+
+```
+準備好的文件：
+☐ index.html 已下載
+☐ README.md 已下載
+☐ .gitignore 已下載
+☐ PASSWORD_TEMPLATE.html 已下載
+
+你的課程文件：
+☐ es.html 已創建（使用密碼模板 + 西班牙語課程）
+☐ zh-tw.html 已創建（使用密碼模板 + 中文課程）
+☐ 兩個文件都包含完整的課程內容
+☐ 密碼已設置為 YJL-95
+
+文件結構：
+☐ 根目錄有：index.html, README.md, .gitignore
+☐ grambook/01-cumpleaños/ 有：es.html, zh-tw.html
+
+本地測試：
+☐ index.html 可以打開並顯示首頁
+☐ 點擊按鈕後跳轉到課程頁面
+☐ 密碼登入工作正常
+☐ 輸入 YJL-95 後看到課程內容
+☐ 課程樣式正常，所有功能工作
+```
+
+---
+
+## 📞 快速參考
+
+**首頁：** `index.html`  
+**西班牙語課程：** `grambook/01-cumpleaños/es.html`  
+**中文課程：** `grambook/01-cumpleaños/zh-tw.html`  
+**密碼：** `YJL-95`  
+**域名：** `grambook.luzranjyue.com`
+
+---
+
+**準備好了嗎？開始上傳到 GitHub！🚀**
+
+Made with ❤️ by Luz Ran Jyue
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GramBook: El Cumpleaños de Lily - DELE A1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 登入屏幕樣式 */
+        #loginOverlay {
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #fef9f5 0%, #f5ede4 100%);
+            z-index: 9999;
+            backdrop-filter: blur(5px);
+        }
+
+        #loginOverlay.hidden {
+            display: none;
+        }
+
+        .login-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(217, 119, 87, 0.2);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            border: 2px solid #d97757;
+        }
+
+        .login-container h1 {
+            font-family: 'Playfair Display', serif;
+            color: #d97757;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-container .subtitle {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 2px solid #d97757;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        .password-input:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(217, 119, 87, 0.3);
+            background-color: #fffbf9;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 1rem;
+            background-color: #d97757;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .login-button:hover {
+            background-color: #c73e1d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(217, 119, 87, 0.3);
+        }
+
+        .login-button:active {
+            transform: translateY(0);
+        }
+
+        .error-message {
+            color: #dc3545;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+            animation: shake 0.3s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        /* 實際內容樣式 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #fef9f5;
+            color: #2c2416;
+            line-height: 1.6;
+        }
+
+        #content.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 登入屏幕 -->
+    <div id="loginOverlay">
+        <div class="login-container">
+            <h1>🔐 GramBook</h1>
+            <p class="subtitle">輸入訪問密碼</p>
+            <input 
+                type="password" 
+                id="passwordInput" 
+                class="password-input" 
+                placeholder="密碼"
+                onkeypress="if(event.key==='Enter') checkPassword()"
+                autocomplete="off"
+            >
+            <button class="login-button" onclick="checkPassword()">進入</button>
+            <p class="error-message" id="errorMsg">❌ 密碼不正確，請重試</p>
+        </div>
+    </div>
+
+    <!-- 實際課程內容 -->
+    <div id="content" class="hidden">
+        <!-- ========================================
+             請將你的完整 HTML 內容放在這裡
+             從 <!DOCTYPE html> 到 </html> 之間的所有內容
+             除了 <!DOCTYPE>, <html>, <head>, <body> 標籤
+             只需要放入 <body> 內部的所有內容
+             ======================================== -->
+        
+        <!-- 示例：這裡會放你的課程內容 -->
+        <div class="container">
+            <header>
+                <h1>GramBook</h1>
+                <p>你的課程將在這裡顯示</p>
+            </header>
+            <section>
+                <h2>載入中...</h2>
+                <p>如果你看到此消息，說明需要將課程內容替換到這個位置。</p>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // ⚠️ 將密碼改為 YJL-95
+        const CORRECT_PASSWORD = "YJL-95";
+
+        function checkPassword() {
+            const userPassword = document.getElementById('passwordInput').value;
+            const errorMsg = document.getElementById('errorMsg');
+            
+            if(userPassword === CORRECT_PASSWORD) {
+                // 隱藏登入屏幕
+                document.getElementById('loginOverlay').classList.add('hidden');
+                // 顯示內容
+                document.getElementById('content').classList.remove('hidden');
+                // 可選：清除密碼輸入
+                document.getElementById('passwordInput').value = '';
+            } else {
+                // 顯示錯誤消息
+                errorMsg.classList.add('show');
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('passwordInput').focus();
+                
+                // 3秒後隱藏錯誤消息
+                setTimeout(() => {
+                    errorMsg.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        // 頁面加載時焦點放在密碼輸入框
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('passwordInput').focus();
+        });
+
+        // 阻止返回/刷新後重新輸入
+        window.addEventListener('beforeunload', function() {
+            if(!document.getElementById('loginOverlay').classList.contains('hidden')) {
+                // 用戶未登入
+            }
+        });
+    </script>
+</body>
+</html>
+
+# ⚡ 快速開始 - 5 步部署 GramBook
+
+**預計時間：30 分鐘**
+
+---
+
+## 📋 你已經有的
+
+✅ GitHub 帳號  
+✅ Cloudflare 帳號  
+✅ 域名：luzranjyue.com  
+✅ 課程文件（es.html 和 zh-tw.html）
+
+---
+
+## 🚀 5 個簡單步驟
+
+### **步驟 1：在 GitHub 創建倉庫**
+
+1. 打開 https://github.com/new
+2. 倉庫名稱：`spanishlu-grambook`
+3. 勾選 ☑️ **Public**
+4. 點擊 **「Create repository」**
+
+✅ **完成！**
+
+---
+
+### **步驟 2：上傳所有文件**
+
+**選項 A - 用 GitHub 網頁（最簡單）：**
+
+1. 在你的倉庫中，點擊 **「Add file」→「Upload files」**
+2. 拖拽或選擇這些文件：
+   ```
+   ✓ index.html
+   ✓ README.md
+   ✓ .gitignore
+   ✓ PASSWORD_TEMPLATE.html
+   ✓ SETUP_GUIDE.md
+   ```
+3. 點擊 **「Commit changes」**
+
+**選項 B - 用 GitHub Desktop：**
+
+1. 打開 GitHub Desktop
+2. 點擊左上角 **「Current Repository」** → 選擇 **「spanishlu-grambook」**
+3. 複製所有文件到本地資料夾
+4. 在 GitHub Desktop 中點擊 **「Commit」** → **「Push」**
+
+✅ **完成！**
+
+---
+
+### **步驟 3：創建課程文件夾結構**
+
+**在 GitHub 網頁上：**
+
+1. 點擊 **「Add file」** → **「Create new file」**
+2. 文件名：`grambook/01-cumpleaños/es.html`
+3. 複製以下內容：
+
+```html
+<!-- 複製 PASSWORD_TEMPLATE.html 的全部內容 -->
+<!-- 然後在 <div id="content"> 中替換課程內容 -->
+```
+
+4. 點擊 **「Commit new file」**
+
+重複一次，創建 `grambook/01-cumpleaños/zh-tw.html`
+
+✅ **完成！**
+
+---
+
+### **步驟 4：在 Cloudflare Pages 部署**
+
+1. 登入 https://dash.cloudflare.com
+2. 選擇域名 **luzranjyue.com**
+3. 左側 → **Workers & Pages**
+4. 點擊 **「Create project」** → **「Connect to Git」**
+5. 選擇 **「spanishlu-grambook」**
+6. 點擊 **「Save and Deploy」**
+7. 等待 **「✓ Deployment successful」**
+
+✅ **完成！**
+
+---
+
+### **步驟 5：添加自定義域名**
+
+1. 在 Cloudflare Pages 中，進入你的項目
+2. 點擊 **「Settings」** → **「Custom domains」**
+3. 點擊 **「Add custom domain」**
+4. 輸入：`grambook.luzranjyue.com`
+5. 按照指示更新 DNS（通常自動）
+6. 等待 DNS 生效（5-15 分鐘）
+
+✅ **完成！**
+
+---
+
+## 🎉 你已完成！
+
+訪問 **https://grambook.luzranjyue.com** 
+
+輸入密碼：**YJL-95**
+
+---
+
+## 📁 你現在需要的文件
+
+我已為你準備好的文件在這裡：
+
+```
+這些文件已經準備好：
+✅ index.html - 首頁
+✅ README.md - 項目說明
+✅ .gitignore - Git 配置
+✅ PASSWORD_TEMPLATE.html - 密碼模板
+✅ SETUP_GUIDE.md - 詳細指南
+✅ QUICK_START.md - 本文件
+
+你需要添加的文件：
+✅ grambook/01-cumpleaños/es.html
+✅ grambook/01-cumpleaños/zh-tw.html
+   （這些是你之前創建的課程文件）
+```
+
+---
+
+## 📝 將你的課程文件集成
+
+### 對於 es.html（西班牙語）：
+
+1. 打開 `PASSWORD_TEMPLATE.html`
+2. 找到註釋：
+   ```html
+   <!-- ========================================
+        請將你的完整 HTML 內容放在這裡
+        ======================================== -->
+   ```
+3. 複製你之前的 `el_cumpleaños_grambook_interactivo.html` 中，`<container>` 到 `</footer>` 的所有內容
+4. 粘貼替換註釋
+5. 保存為 `grambook/01-cumpleaños/es.html`
+
+### 對於 zh-tw.html（中文）：
+
+完全相同的步驟，只是使用中文版本的課程內容。
+
+---
+
+## ⏱️ 預計時間表
+
+| 步驟 | 時間 | 累計 |
+|------|------|------|
+| 1. 創建 GitHub 倉庫 | 2 分鐘 | 2 分 |
+| 2. 上傳文件 | 5 分鐘 | 7 分 |
+| 3. 創建課程文件 | 10 分鐘 | 17 分 |
+| 4. Cloudflare Pages | 5 分鐘 | 22 分 |
+| 5. 添加域名 | 5 分鐘 | 27 分 |
+| **DNS 生效等待** | **5-15 分鐘** | **32-42 分** |
+| **總計** | | **~30-45 分鐘** |
+
+---
+
+## 🐛 快速故障排除
+
+| 問題 | 解決方案 |
+|------|---------|
+| 看不到首頁 | 等待 DNS 生效，清除緩存 |
+| 課程 404 | 檢查文件路徑和文件名 |
+| 密碼不工作 | 檢查是否輸入正確 YJL-95 |
+| GitHub 無法連接 | 檢查倉庫是否為 Public |
+
+---
+
+## ✅ 驗收清單
+
+完成後檢查：
+
+```
+☐ GitHub 倉庫已創建
+☐ 所有文件已上傳
+☐ Cloudflare Pages 已連接
+☐ 可以訪問首頁
+☐ 輸入密碼後看到課程
+☐ 西班牙語課程正常
+☐ 中文課程正常
+```
+
+---
+
+## 🎯 下一步
+
+✅ 一切都設置好了！
+
+現在你可以：
+
+1. **在 Gumroad 銷售**
+   ```
+   產品名稱：GramBook POD y POI - Nivel A1
+   交付內容：
+   密碼：YJL-95
+   鏈接：https://grambook.luzranjyue.com
+   ```
+
+2. **添加更多課程**
+   ```
+   創建 grambook/02-nombre/
+   複製相同的結構
+   Push 到 GitHub
+   Cloudflare 自動部署！
+   ```
+
+3. **更新課程**
+   ```
+   編輯 HTML 文件
+   Git push
+   完成！（5 分鐘自動部署）
+   ```
+
+---
+
+## 📞 需要詳細幫助？
+
+查看 **SETUP_GUIDE.md** 了解詳細說明。
+
+---
+
+**祝賀！你的 GramBook 已上線！🎉**
+
+Made with ❤️ by Luz Ran Jyue
+
+# 🎓 GramBook - SpanishLu 西班牙語文法練習
+
+**西班牙語文法互動練習平台** | 由 Luz Ran Jyue 創建
+
+🌐 訪問：[grambook.luzranjyue.com](https://grambook.luzranjyue.com)
+
+---
+
+## 📚 課程列表
+
+### 1. 莉莉的生日 (El Cumpleaños de Lily) - DELE A1
+- **內容：** 直接受詞代詞（POD）和間接受詞代詞（POI）
+- **語言：** 西班牙語 + 中文繁體
+- **構成：**
+  - 1個交互式故事
+  - 8個理解問題
+  - 6個文法練習
+  - 即時反饋和評分
+
+#### 訪問：
+- 西班牙語版本：`/grambook/01-cumpleaños/es.html`
+- 中文版本：`/grambook/01-cumpleaños/zh-tw.html`
+
+---
+
+## 🛠️ 項目結構
+
+```
+spanishlu-grambook/
+│
+├── index.html                    # 首頁 - 課程選擇
+│
+├── grambook/
+│   └── 01-cumpleaños/
+│       ├── es.html              # 西班牙語版本
+│       ├── zh-tw.html           # 中文繁體版本
+│       └── assets/              # （未來用於共享資源）
+│
+├── README.md                     # 本文件
+├── .gitignore                    # Git 忽略規則
+└── SETUP_GUIDE.md               # 詳細設置指南
+
+```
+
+---
+
+## 🔐 安全性
+
+### 密碼保護
+- 所有課程都受密碼保護
+- **密碼：** `YJL-95`
+- 密碼可以在 Cloudflare Access 中更改（用於銷售課程時）
+
+### 架構
+- 前端密碼保護（JavaScript）
+- 可升級至 Cloudflare Access（用於多個密碼/用戶管理）
+
+---
+
+## 🚀 快速開始
+
+### 本地開發
+1. **克隆倉庫：**
+```bash
+git clone https://github.com/YourUsername/spanishlu-grambook.git
+cd spanishlu-grambook
+```
+
+2. **開啟本地服務器：**
+```bash
+# Python 3
+python -m http.server 8000
+
+# 或 Python 2
+python -m SimpleHTTPServer 8000
+```
+
+3. **訪問：** http://localhost:8000
+
+### 部署到 Cloudflare Pages
+
+1. **推送至 GitHub：**
+```bash
+git add .
+git commit -m "Initial commit"
+git push origin main
+```
+
+2. **連接到 Cloudflare Pages：**
+   - 登入 Cloudflare
+   - Pages → Connect to Git
+   - 選擇此倉庫
+   - 按照說明部署
+
+3. **添加自定義域名：**
+   - 在 Cloudflare Pages 設置中添加 `grambook.luzranjyue.com`
+   - 更新 DNS 記錄
+
+---
+
+## 📝 如何添加新課程
+
+### 1. 創建新文件夾
+```bash
+mkdir -p grambook/02-nombre/
+```
+
+### 2. 複製和修改
+```
+複製密碼模板：PASSWORD_TEMPLATE.html
+粘貼為：grambook/02-nombre/es.html
+粘貼為：grambook/02-nombre/zh-tw.html
+```
+
+### 3. 編輯內容
+- 打開 `es.html` 和 `zh-tw.html`
+- 替換 `<!-- 實際課程內容放在這裡 -->` 部分
+- 將你的課程 HTML 放入 `<div id="content">` 中
+
+### 4. 更新首頁
+編輯 `index.html` - 在課程卡片中添加新課程
+
+### 5. 推送更改
+```bash
+git add .
+git commit -m "Add lesson: nombre"
+git push origin main
+```
+
+**Cloudflare 會自動部署！**
+
+---
+
+## 💰 販售課程
+
+### 在 Gumroad 上販售
+
+1. **創建產品：**
+   - 名稱：`GramBook POD y POI - Nivel A1`
+   - 價格：`$5 - $15 USD`
+   - 描述：「互動式西班牙語文法課程」
+
+2. **在交付內容中：**
+```
+感謝購買 GramBook POD y POI!
+
+你的訪問密碼：YJL-95
+
+課程訪問：
+- 首頁：https://grambook.luzranjyue.com
+- 西班牙語：https://grambook.luzranjyue.com/grambook/01-cumpleaños/es.html
+- 中文繁體：https://grambook.luzranjyue.com/grambook/01-cumpleaños/zh-tw.html
+
+使用方法：
+1. 打開課程鏈接
+2. 輸入密碼：YJL-95
+3. 開始學習！
+
+問題？聯繫：[你的郵箱]
+```
+
+### 更改密碼（新課程或批次）
+- 編輯 `es.html` 和 `zh-tw.html`
+- 在 `PASSWORD_TEMPLATE.html` 中更改 `CORRECT_PASSWORD`
+- 在 Gumroad 中更新密碼
+- 推送至 GitHub，Cloudflare 自動更新
+
+---
+
+## 📊 課程統計
+
+### El Cumpleaños de Lily
+- **難度：** DELE A1
+- **預計時長：** 60 分鐘
+- **內容：**
+  - 1個故事
+  - 8個理解問題
+  - 6個文法練習
+- **支持語言：** 2（西班牙語 + 中文繁體）
+
+---
+
+## 🔧 技術棧
+
+- **前端：** HTML5 + CSS3 + Vanilla JavaScript
+- **託管：** Cloudflare Pages
+- **域名：** luzranjyue.com（自定義域名）
+- **版本控制：** GitHub
+
+### 優勢
+- ✅ 無需後端服務器
+- ✅ 自動化部署
+- ✅ 全球 CDN（快速訪問）
+- ✅ 免費 HTTPS
+- ✅ 易於更新（Git Push）
+
+---
+
+## 📁 文件說明
+
+| 文件 | 用途 |
+|------|------|
+| `index.html` | 首頁 - 課程選擇 |
+| `grambook/01-cumpleaños/es.html` | 西班牙語課程 + 密碼保護 |
+| `grambook/01-cumpleaños/zh-tw.html` | 中文課程 + 密碼保護 |
+| `PASSWORD_TEMPLATE.html` | 用於新課程的密碼保護模板 |
+| `README.md` | 此文件 |
+| `SETUP_GUIDE.md` | 詳細設置指南 |
+| `.gitignore` | Git 忽略規則 |
+
+---
+
+## 🐛 故障排除
+
+### 課程頁面無法加載
+- ✅ 檢查密碼是否正確（`YJL-95`）
+- ✅ 確保 JavaScript 已啟用
+- ✅ 清除瀏覽器緩存
+
+### Cloudflare Pages 未更新
+- ✅ 檢查 GitHub 推送是否成功（`git push`）
+- ✅ 等待 Cloudflare 部署完成（通常 1-2 分鐘）
+- ✅ 在 Cloudflare 儀表板中檢查構建狀態
+
+### 自定義域名無法訪問
+- ✅ 檢查 DNS 記錄是否指向 Cloudflare
+- ✅ 等待 DNS 生效（最多 48 小時）
+- ✅ 在 Cloudflare 中驗證 CNAME 記錄
+
+---
+
+## 📞 支持
+
+### 遇到問題？
+1. 檢查 `SETUP_GUIDE.md` 中的詳細說明
+2. 查看 GitHub Issues
+3. 聯繫 Luz Ran Jyue
+
+### 反饋和建議
+- 💌 Email: [你的郵箱]
+- 🌐 Website: [你的網站]
+- 📱 Threads: [@luz_ranjyue](https://www.threads.net/@luz_ranjyue)
+
+---
+
+## 📜 許可證
+
+© Luz Ran Jyue Studio LLC. All rights reserved.
+
+本課程內容受著作權保護。購買後僅供個人使用。
+
+---
+
+## 🎯 未來計劃
+
+- [ ] 課程 2：莉莉和她的貓（A1）
+- [ ] 課程 3：時態動詞（A2）
+- [ ] 課程 4：轉述語言（A2）
+- [ ] 學生進度跟踪系統
+- [ ] 多語言支持（西班牙語、英語、中文繁體、中文簡體）
+- [ ] 移動應用程序
+
+---
+
+## 🙏 致謝
+
+感謝所有支持 SpanishLu 的學生和朋友！
+
+---
+
+**Made with ❤️ by Luz Ran Jyue | 戀上西班牙語 | 西語萌萌學園 con Luz**
+
+# 🚀 GramBook 設置和部署指南
+
+**完整的分步驟說明，適合初學者**
+
+---
+
+## 📋 你需要的東西
+
+- ✅ GitHub 帳號（已有）
+- ✅ Cloudflare 帳號（已有）
+- ✅ 自定義域名：luzranjyue.com（已有）
+- ✅ Git 客戶端（可選，可用 GitHub Desktop）
+
+---
+
+## 🔧 第一步：在 GitHub 創建倉庫
+
+### 選項 A：使用 GitHub 網站（最簡單）
+
+1. **登入 GitHub：** https://github.com/login
+
+2. **創建新倉庫：**
+   - 點擊右上角 `+` → `New repository`
+   - 或直接訪問 https://github.com/new
+
+3. **填寫信息：**
+   ```
+   Repository name: spanishlu-grambook
+   Description: GramBook - 西班牙語文法互動練習
+   Public ☑️ (必須公開，讓 Cloudflare 可以看到)
+   Add a README file ☑️
+   Add .gitignore ☑️ (選擇 None)
+   ```
+
+4. **點擊 `Create repository`**
+
+---
+
+### 選項 B：使用 GitHub Desktop（推薦新手）
+
+1. **安裝 GitHub Desktop：** https://desktop.github.com
+
+2. **登入帳號**
+
+3. **創建新倉庫：**
+   - File → New Repository
+   ```
+   Name: spanishlu-grambook
+   Description: GramBook - 西班牙語文法互動練習
+   Local Path: 選擇保存位置
+   Initialize this repository with a README ☑️
+   ```
+
+4. **點擊 `Create Repository`**
+
+---
+
+## 📁 第二步：添加文件
+
+### 下載我為你準備的文件
+
+我已為你創建了以下文件，你可以從這裡下載：
+- ✅ `index.html` - 首頁
+- ✅ `README.md` - 項目說明
+- ✅ `.gitignore` - Git 配置
+- ✅ `PASSWORD_TEMPLATE.html` - 密碼模板
+
+### 創建本地文件夾結構
+
+在你電腦上創建此結構（如果還沒有）：
+
+```
+spanishlu-grambook/
+├── index.html
+├── README.md
+├── .gitignore
+├── SETUP_GUIDE.md (本文件)
+├── PASSWORD_TEMPLATE.html
+└── grambook/
+    └── 01-cumpleaños/
+        ├── es.html (稍後添加)
+        └── zh-tw.html (稍後添加)
+```
+
+### 添加我的文件
+
+1. **下載文件包**（我已為你準備）
+
+2. **複製到本地資料夾：**
+   ```
+   spanishlu-grambook/
+   ├── index.html ← 複製進來
+   ├── README.md ← 複製進來
+   ├── .gitignore ← 複製進來
+   └── PASSWORD_TEMPLATE.html ← 複製進來
+   ```
+
+3. **創建課程文件夾：**
+   ```bash
+   # 如果用命令行
+   mkdir -p grambook/01-cumpleaños
+   ```
+
+   或用文件瀏覽器手動創建
+
+---
+
+## 📝 第三步：準備課程文件
+
+### 創建密碼保護的課程
+
+#### 對於西班牙語版本 (es.html)：
+
+1. **複製模板：**
+   ```
+   複製 PASSWORD_TEMPLATE.html
+   粘貼到 grambook/01-cumpleaños/
+   重命名為 es.html
+   ```
+
+2. **編輯 es.html：**
+   - 用文本編輯器打開
+   - 找到這一行：
+     ```html
+     <!-- ========================================
+          請將你的完整 HTML 內容放在這裡
+          ...
+          ======================================== -->
+   ```
+
+3. **替換內容：**
+   - 打開你之前的 `el_cumpleaños_grambook_interactivo.html`
+   - 複製 `<container>` 到 `</footer>` 之間的所有內容
+   - 粘貼到 es.html 中，替換註釋部分
+   - **不要替換最上面的 `<!DOCTYPE>` 和 `<head>` 部分**
+
+4. **保存文件**
+
+#### 對於中文版本 (zh-tw.html)：
+
+**完全相同的步驟，只是：**
+- 創建 `grambook/01-cumpleaños/zh-tw.html`
+- 使用你的中文版本內容
+- 替換同樣的位置
+
+### 完成後的結構：
+```
+grambook/01-cumpleaños/
+├── es.html (密碼保護 + 西班牙語課程)
+└── zh-tw.html (密碼保護 + 中文課程)
+```
+
+---
+
+## 🎯 第四步：測試本地文件
+
+### 打開網頁測試
+
+1. **打開 index.html：**
+   - 雙擊 `spanishlu-grambook/index.html`
+   - 應該看到首頁，有兩個課程按鈕
+
+2. **測試課程：**
+   - 點擊「西班牙語」或「中文」
+   - 應該看到密碼登入屏幕
+   - 輸入密碼：`YJL-95`
+   - 應該看到課程內容
+
+3. **如果看不到課程內容：**
+   - 檢查是否正確粘貼了課程 HTML
+   - 查看瀏覽器控制台（F12）是否有錯誤
+   - 確認密碼是否正確
+
+---
+
+## 📤 第五步：上傳到 GitHub
+
+### 使用 GitHub Desktop（推薦）
+
+1. **打開 GitHub Desktop**
+
+2. **選擇本地倉庫：**
+   - 點擊左上角「Current Repository」
+   - 選擇 `spanishlu-grambook`
+
+3. **提交變更：**
+   - 左側應該顯示你新增的所有文件
+   - 在底部「Summary」輸入：
+     ```
+     Initial commit: Add GramBook El Cumpleaños
+     ```
+   - 點擊「Commit to main」
+
+4. **發布到 GitHub：**
+   - 點擊右上角「Publish repository」
+   - 保持「Private」取消勾選（必須公開）
+   - 點擊「Publish Repository」
+
+### 使用命令行
+
+```bash
+# 進入資料夾
+cd spanishlu-grambook
+
+# 初始化 Git（如果還沒有）
+git init
+
+# 添加遠程倉庫
+git remote add origin https://github.com/YourUsername/spanishlu-grambook.git
+git branch -M main
+
+# 添加所有文件
+git add .
+
+# 提交
+git commit -m "Initial commit: Add GramBook El Cumpleaños"
+
+# 推送到 GitHub
+git push -u origin main
+```
+
+---
+
+## 🚀 第六步：在 Cloudflare Pages 部署
+
+### 連接 GitHub
+
+1. **登入 Cloudflare：**
+   - 訪問 https://dash.cloudflare.com
+   - 選擇你的帳號和域名 `luzranjyue.com`
+
+2. **進入 Pages：**
+   - 左側邊欄 → Workers & Pages
+   - 點擊「Pages」標籤
+
+3. **創建項目：**
+   - 點擊「Create project」
+   - 選擇「Connect to Git」
+
+4. **授權 GitHub：**
+   - 點擊「GitHub」
+   - 授權 Cloudflare 訪問你的 GitHub
+
+5. **選擇倉庫：**
+   - 在列表中找到 `spanishlu-grambook`
+   - 點擊「Begin setup」
+
+6. **配置構建設置：**
+   ```
+   Production branch: main
+   Build command: (留空 - 不需要構建)
+   Build output directory: (留空)
+   Environment variables: (不需要)
+   ```
+   - 點擊「Save and Deploy」
+
+7. **等待部署：**
+   - Cloudflare 會自動部署
+   - 看到「✓ Deployment successful」後完成
+
+---
+
+## 🌐 第七步：配置自定義域名
+
+### 添加域名到 Pages
+
+1. **在 Cloudflare Pages 中：**
+   - 進入 spanishlu-grambook 項目
+   - 點擊「Settings」
+   - 點擊「Custom domains」
+
+2. **添加域名：**
+   - 點擊「Add custom domain」
+   - 輸入：`grambook.luzranjyue.com`
+   - 點擊「Continue」
+
+3. **驗證域名：**
+   - 按照 Cloudflare 的說明更新 DNS
+   - 通常自動配置，無需手動操作
+   - 等待 DNS 生效（通常 5-15 分鐘）
+
+4. **測試：**
+   - 訪問 `https://grambook.luzranjyue.com`
+   - 應該看到首頁
+   - 輸入密碼 `YJL-95` 測試課程
+
+---
+
+## ✅ 驗收清單
+
+完成以下步驟後，你的 GramBook 就已部署好了！
+
+```
+☐ GitHub 倉庫已創建（spanishlu-grambook）
+☐ 所有文件已上傳到 GitHub
+☐ Cloudflare Pages 已連接 GitHub
+☐ 自定義域名已配置（grambook.luzranjyue.com）
+☐ 可以訪問首頁（https://grambook.luzranjyue.com）
+☐ 課程密碼保護工作（輸入 YJL-95）
+☐ 西班牙語課程可以打開
+☐ 中文課程可以打開
+```
+
+---
+
+## 🔄 更新課程（之後如何更新）
+
+一旦設置完成，更新課程只需 3 步：
+
+### 1. 編輯文件
+```
+編輯你的本地文件
+例如：grambook/01-cumpleaños/es.html
+```
+
+### 2. 上傳到 GitHub
+```bash
+git add .
+git commit -m "Update lesson content"
+git push origin main
+```
+
+### 3. Cloudflare 自動部署
+```
+無需操作！Cloudflare 會自動檢測變更並部署
+通常在 1-2 分鐘內完成
+```
+
+---
+
+## 🐛 故障排除
+
+### 問題：看不到首頁
+**解決方案：**
+- 等待 5 分鐘（DNS 生效時間）
+- 清除瀏覽器緩存（Ctrl+Shift+Delete）
+- 在 Cloudflare 儀表板檢查部署狀態
+
+### 問題：課程文件找不到（404 錯誤）
+**解決方案：**
+- 檢查文件路徑是否正確
+- 確保文件已上傳到 GitHub
+- 檢查文件名是否匹配（區分大小寫）
+
+### 問題：密碼保護不工作
+**解決方案：**
+- 檢查密碼是否輸入正確（YJL-95）
+- 確保 JavaScript 已啟用
+- 刷新頁面（Ctrl+F5）
+
+### 問題：HTTPS 有紅色警告
+**解決方案：**
+- Cloudflare 自動提供 HTTPS
+- 通常在 24 小時內解決
+- 不需要做任何操作
+
+---
+
+## 💡 常見問題
+
+**Q: 我需要技術知識嗎？**
+A: 不需要！GitHub Desktop 和 Cloudflare 都很直觀，按照步驟操作即可。
+
+**Q: 文件更新後多久生效？**
+A: Cloudflare Pages 通常在 1-2 分鐘內部署。
+
+**Q: 密碼可以改嗎？**
+A: 可以！編輯 `es.html` 和 `zh-tw.html` 中的密碼，然後 push 即可。
+
+**Q: 可以有多個密碼嗎？**
+A: 簡單版本不支持。如果需要多個密碼，可以升級到 Cloudflare Access（後期進行）。
+
+**Q: 學生會看到密碼嗎？**
+A: 不會。密碼在客戶端進行驗證，用戶只看到「輸入密碼」提示。
+
+---
+
+## 🎯 下一步：在 Gumroad 銷售
+
+一旦課程部署到 Cloudflare，你可以在 Gumroad 上銷售：
+
+1. **在 Gumroad 創建產品**
+2. **在交付內容中提供密碼和鏈接**
+3. **每次更新課程時，同時更新 Gumroad 和 GitHub**
+
+---
+
+## 📞 需要幫助？
+
+如果遇到問題：
+1. 重新閱讀本指南
+2. 檢查 GitHub 和 Cloudflare 的官方文檔
+3. 查看瀏覽器控制台的錯誤信息（F12）
+
+---
+
+**祝你設置順利！🚀**
+
+Made with ❤️ for SpanishLu
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✧ GramBook ✧ | SpanishLu 西語文法練習</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Caveat:wght@400;700&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #fef9f5 0%, #f5ede4 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: #d97757;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .brand {
+            font-family: 'Caveat', cursive;
+            font-size: 1.8rem;
+            color: #d97757;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .tagline {
+            font-size: 1rem;
+            color: #999;
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        .divider {
+            width: 60px;
+            height: 2px;
+            background-color: #d97757;
+            margin: 2rem auto;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .course-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(217, 119, 87, 0.12);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background-color: #d97757;
+        }
+
+        .course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px rgba(217, 119, 87, 0.2);
+            border-color: #d97757;
+        }
+
+        .course-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .course-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .course-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #d97757;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .course-level {
+            display: inline-block;
+            background-color: rgba(217, 119, 87, 0.1);
+            color: #d97757;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .course-description {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            min-height: 60px;
+        }
+
+        .course-content {
+            background-color: #faf8f5;
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .course-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .course-content li {
+            padding: 0.4rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .course-content li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #d97757;
+            font-weight: 700;
+        }
+
+        .lang-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .lang-btn {
+            flex: 1;
+            padding: 0.9rem 1.2rem;
+            background-color: #d97757;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(217, 119, 87, 0.2);
+        }
+
+        .lang-btn:hover {
+            background-color: #c73e1d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(217, 119, 87, 0.3);
+        }
+
+        .lang-btn:active {
+            transform: translateY(0);
+        }
+
+        .lang-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background-color: #ccc;
+        }
+
+        .coming-soon {
+            text-align: center;
+            color: #999;
+            font-style: italic;
+            padding: 1.5rem;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 2px solid rgba(217, 119, 87, 0.2);
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .footer-brand {
+            font-family: 'Caveat', cursive;
+            font-size: 1.2rem;
+            color: #d97757;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .footer-links {
+            margin: 1rem 0;
+            font-size: 0.85rem;
+        }
+
+        .footer-links a {
+            color: #d97757;
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+
+            .brand {
+                font-size: 1.4rem;
+            }
+
+            .course-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .course-card {
+                padding: 2rem;
+            }
+
+            .course-title {
+                font-size: 1.5rem;
+            }
+
+            .lang-buttons {
+                flex-direction: column;
+            }
+
+            header {
+                margin-bottom: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">✧ GramBook ✧</div>
+            <div class="brand">戀上西班牙語</div>
+            <p class="subtitle">西班牙語文法互動練習</p>
+            <p class="tagline">Pronunciado por Luz Ran Jyue</p>
+            <div class="divider"></div>
+        </header>
+
+        <div class="course-grid">
+            <!-- Course 1: El Cumpleaños -->
+            <div class="course-card">
+                <div class="course-header">
+                    <div class="course-emoji">🎂</div>
+                    <h2 class="course-title">莉莉的生日</h2>
+                    <span class="course-level">DELE A1</span>
+                </div>
+
+                <p class="course-description">通過莉莉收到生日禮物的故事，學習直接受詞代詞（POD）和間接受詞代詞（POI）的用法。</p>
+
+                <div class="course-content">
+                    <ul>
+                        <li>1個交互式故事</li>
+                        <li>8個理解問題</li>
+                        <li>6個文法練習</li>
+                        <li>即時反饋和評分</li>
+                    </ul>
+                </div>
+
+                <div class="lang-buttons">
+                    <button class="lang-btn" onclick="goTo('/grambook/01-cumpleaños/es.html')">🇪🇸 Español</button>
+                    <button class="lang-btn" onclick="goTo('/grambook/01-cumpleaños/zh-tw.html')">🇹🇼 中文</button>
+                </div>
+            </div>
+
+            <!-- Course 2: Coming Soon -->
+            <div class="course-card">
+                <div class="course-header">
+                    <div class="course-emoji">🐱</div>
+                    <h2 class="course-title">莉莉和她的貓</h2>
+                    <span class="course-level">DELE A1</span>
+                </div>
+
+                <p class="course-description">即將推出：探索莉莉的三隻貓咪，學習更多代詞的用法和日常對話。</p>
+
+                <div class="coming-soon">
+                    📅 敬請期待<br>
+                    新課程正在開發中
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-brand">✧ SpanishLu ✧</div>
+            <p>戀上西班牙語 | 西語萌萌學園 con Luz</p>
+            <div class="footer-links">
+                <a href="https://www.patreon.com/c/LuzRanJyueStudio" target="_blank">Patreon</a>
+                <a href="https://vocus.cc/salon/spanishlu" target="_blank">Vocus</a>
+                <a href="https://www.threads.net/@luz_ranjyue" target="_blank">Threads</a>
+            </div>
+            <p style="margin-top: 1.5rem; font-size: 0.8rem;">© 2024 Luz Ran Jyue Studio LLC. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        function goTo(path) {
+            window.location.href = path;
+        }
+    </script>
+</body>
+</html>
+
+# 🎉 START HERE - 從這裡開始！
+
+**Luz Ran Jyue，你的 GramBook Repository 已經完全準備好了！**
+
+---
+
+## ✅ 已經為你準備好的
+
+所有下面的文件已經準備好，你可以直接使用：
+
+### 📦 **已準備好的文件**（7個）
+
+```
+✅ spanishlu-grambook-index.html  → 重命名為 index.html
+✅ PASSWORD_TEMPLATE.html         → 用作模板
+✅ README.md                       → 項目說明
+✅ .gitignore                      → Git 配置
+✅ SETUP_GUIDE.md                  → 詳細指南
+✅ QUICK_START.md                  → 快速開始
+✅ FILES_CHECKLIST.md              → 文件清單
+```
+
+---
+
+## 🎯 你現在需要做什麼（只需 5 步！）
+
+### **第 1 步：準備你的文件（10 分鐘）**
+
+你有兩個課程文件：
+- ✅ `el_cumpleaños_grambook_interactivo.html`（西班牙語）
+- ✅ `el_cumpleaños_grambook_chino_interactivo.html`（中文）
+
+**在下一步中，你需要把這兩個文件的課程內容集成到密碼模板中。**
+
+---
+
+### **第 2 步：在 GitHub 創建倉庫（3 分鐘）**
+
+1. 打開 https://github.com/new
+2. 倉庫名稱：`spanishlu-grambook`
+3. 勾選 ☑️ **Public**
+4. 點擊 **Create repository**
+
+✅ **完成！**
+
+---
+
+### **第 3 步：上傳我準備的文件到 GitHub（5 分鐘）**
+
+**在你的 GitHub 倉庫中：**
+
+1. 點擊 **Add file** → **Upload files**
+2. 選擇這 4 個文件上傳：
+   ```
+   ✓ spanishlu-grambook-index.html (重命名為 index.html)
+   ✓ README.md
+   ✓ .gitignore
+   ✓ PASSWORD_TEMPLATE.html (作為參考，可選)
+   ```
+3. 點擊 **Commit changes**
+
+✅ **完成！**
+
+---
+
+### **第 4 步：集成你的課程文件（10 分鐘）**
+
+**這是最重要的部分！**
+
+#### 創建西班牙語版本 (es.html)：
+
+1. **在 GitHub 中創建文件：**
+   - 點擊 **Add file** → **Create new file**
+   - 文件名：`grambook/01-cumpleaños/es.html`
+
+2. **複製 PASSWORD_TEMPLATE.html 的內容**
+
+3. **找到這個註釋：**
+   ```html
+   <!-- ========================================
+        請將你的完整 HTML 內容放在這裡
+        ...
+        ======================================== -->
+   ```
+
+4. **做這個：**
+   - 打開你的 `el_cumpleaños_grambook_interactivo.html`
+   - 找到 `<div class="container">` 到 `</footer>` 的所有內容
+   - **完全替換**上述註釋（包括註釋本身）
+   - 粘貼你的課程內容
+
+5. **點擊 Commit new file**
+
+#### 創建中文版本 (zh-tw.html)：
+
+完全相同的步驟，只是：
+- 文件名：`grambook/01-cumpleaños/zh-tw.html`
+- 使用你的 `el_cumpleaños_grambook_chino_interactivo.html`
+
+✅ **完成！**
+
+---
+
+### **第 5 步：在 Cloudflare Pages 部署（5 分鐘）**
+
+1. **登入 Cloudflare：** https://dash.cloudflare.com
+
+2. **進入 Pages：**
+   - 左側 → Workers & Pages → Pages
+
+3. **創建新項目：**
+   - 點擊 **Create project**
+   - 選擇 **Connect to Git**
+   - 授權 GitHub（如果需要）
+   - 選擇 **spanishlu-grambook**
+
+4. **配置：**
+   ```
+   Production branch: main
+   Build command: (留空)
+   Build output directory: (留空)
+   Environment variables: (留空)
+   ```
+
+5. **點擊 Save and Deploy**
+
+6. **添加域名：**
+   - 進入項目 Settings → Custom domains
+   - 添加：`grambook.luzranjyue.com`
+   - 按照提示更新 DNS（通常自動）
+
+✅ **完成！等待 DNS 生效 (5-15 分鐘)**
+
+---
+
+## 🎉 就這樣！
+
+完成上述 5 步後，你的 GramBook 就上線了！
+
+訪問：**https://grambook.luzranjyue.com**
+
+輸入密碼：**YJL-95**
+
+---
+
+## 📁 完整的文件結構
+
+完成後你的 GitHub 倉庫應該是這樣的：
+
+```
+spanishlu-grambook/
+├── index.html                      ← index.html (重命名)
+├── README.md                        ← 已上傳
+├── .gitignore                       ← 已上傳
+├── PASSWORD_TEMPLATE.html           ← 參考文件
+├── SETUP_GUIDE.md                   ← 參考文件
+├── QUICK_START.md                   ← 參考文件
+├── FILES_CHECKLIST.md               ← 參考文件
+│
+└── grambook/
+    └── 01-cumpleaños/
+        ├── es.html                  ← 你的西班牙語課程
+        └── zh-tw.html               ← 你的中文課程
+```
+
+---
+
+## 🔑 重要資訊
+
+| 項目 | 內容 |
+|------|------|
+| **域名** | grambook.luzranjyue.com |
+| **密碼** | YJL-95 |
+| **GitHub** | spanishlu-grambook |
+| **第一個課程** | 莉莉的生日 (El Cumpleaños) |
+
+---
+
+## 📚 如果需要詳細幫助
+
+- ✅ **快速 5 步部署** → 閱讀 `QUICK_START.md`
+- ✅ **詳細說明** → 閱讀 `SETUP_GUIDE.md`
+- ✅ **文件說明** → 閱讀 `FILES_CHECKLIST.md`
+
+---
+
+## 💡 貼心提示
+
+### ✨ 上傳到 GitHub 的順序
+
+**首次上傳：**
+1. 先上傳準備好的文件 (index.html, README.md, .gitignore)
+2. 再創建課程文件夾和 es.html/zh-tw.html
+
+**之後更新：**
+```bash
+編輯文件 → Git push → Cloudflare 自動更新（1-2 分鐘）
+```
+
+### 🔐 密碼說明
+
+- 密碼位置：`es.html` 和 `zh-tw.html` 中的 `const CORRECT_PASSWORD = "YJL-95";`
+- 要改密碼：編輯文件，改掉這行，然後 push
+- 每個課程可以有不同密碼
+
+### 🚀 添加新課程
+
+完成第一個課程後，添加新課程非常簡單：
+
+```
+1. 創建 grambook/02-nombre/es.html 和 zh-tw.html
+2. 複製相同的結構
+3. Push 到 GitHub
+4. Cloudflare 自動部署！
+```
+
+---
+
+## ✅ 最終檢查清單
+
+在點擊上傳到 GitHub 前，確認：
+
+```
+準備好的文件：
+☐ index.html 已下載並準備上傳
+☐ README.md 已下載
+☐ .gitignore 已下載
+☐ PASSWORD_TEMPLATE.html 已下載（參考用）
+
+你的課程文件：
+☐ es.html 已創建（西班牙語課程）
+☐ zh-tw.html 已創建（中文課程）
+☐ 兩個文件都在 grambook/01-cumpleaños/ 資料夾中
+☐ 兩個文件都包含了完整的課程內容
+☐ 密碼已設置為 YJL-95
+
+GitHub：
+☐ 倉庫已創建：spanishlu-grambook
+☐ 已設置為 Public
+
+Cloudflare：
+☐ Cloudflare 帳號已登入
+☐ 已選擇 luzranjyue.com 域名
+☐ 準備好連接 GitHub Pages
+```
+
+---
+
+## 🎯 預計時間表
+
+| 步驟 | 時間 | 
+|------|------|
+| 1️⃣ 準備文件 | 10 分鐘 |
+| 2️⃣ 創建 GitHub 倉庫 | 3 分鐘 |
+| 3️⃣ 上傳準備好的文件 | 5 分鐘 |
+| 4️⃣ 集成課程文件 | 10 分鐘 |
+| 5️⃣ 部署到 Cloudflare | 5 分鐘 |
+| 💾 DNS 生效等待 | 5-15 分鐘 |
+| **總計** | **~40-50 分鐘** |
+
+---
+
+## 🎓 下一步（完成後）
+
+✅ **課程已上線！**
+
+現在你可以：
+
+1. **在 Gumroad 銷售**
+   ```
+   產品名稱：GramBook POD y POI - Nivel A1
+   價格：$5-15 USD
+   交付內容：
+   "感謝購買！
+   密碼：YJL-95
+   訪問：https://grambook.luzranjyue.com"
+   ```
+
+2. **添加新課程**
+   ```
+   創建 grambook/02-nombre/
+   重複相同步驟
+   自動部署！
+   ```
+
+3. **追蹤銷售**
+   ```
+   Gumroad 會自動統計
+   看你賺了多少 💰
+   ```
+
+---
+
+## 📞 遇到問題？
+
+**查看故障排除指南：**
+- 看不到首頁？ → 查看 SETUP_GUIDE.md
+- 密碼不工作？ → 查看 FILES_CHECKLIST.md
+- 課程內容出現問題？ → 檢查 HTML 的集成
+
+---
+
+## 🎉 準備好了嗎？
+
+**現在就開始吧！** 
+
+📍 首先：創建 GitHub 倉庫 (https://github.com/new)
+
+---
+
+**Made with ❤️ by Claude for Luz Ran Jyue**
+
+**戀上西班牙語 | 西語萌萌學園 con Luz ✧**
+
+---
+
+## 📧 快速參考
+
+**你的資訊：**
+- 域名：luzranjyue.com
+- 第一門課程：莉莉的生日 (POD/POI A1)
+- 西班牙語版本：es.html
+- 中文版本：zh-tw.html
+- 密碼：YJL-95
+- GitHub：spanishlu-grambook
+- Cloudflare Pages URL：https://grambook.luzranjyue.com
+
+---
+
+**祝你上傳順利！🚀**
