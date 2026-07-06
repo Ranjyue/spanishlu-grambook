@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Llevar vs. Llevarse — Ejercicios interactivos | SpanishLu</title>
+<style>
+  :root {
+    --kraft: #fdf8f1;
+    --kraft-deep: #efe2cd;
+    --ink: #3a2e22;
+    --ink-soft: #7a6650;
+    --ink-mute: #9c8568;
+    --red: #b03a2e;
+    --red-deep: #8a2a20;
+    --green: #3b6d11;
+    --green-bg: #eaf3de;
+    --red-bg: #fcebeb;
+    --border: #e0cbb0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--kraft);
+    color: var(--ink);
+    font-family: 'Georgia', 'Noto Serif TC', serif;
+    line-height: 1.6;
+  }
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .eyebrow {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: var(--red);
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-size: 32px;
+    margin: 0 0 8px;
+    color: var(--ink);
+  }
+  .subtitle {
+    color: var(--ink-soft);
+    font-size: 15px;
+  }
+  .badge {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 5px 16px;
+    border: 1px solid var(--red);
+    border-radius: 30px;
+    color: var(--red);
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    font-family: 'Courier New', monospace;
+  }
+  .block-title {
+    background: var(--red);
+    color: var(--kraft);
+    padding: 12px 18px;
+    font-size: 17px;
+    border-radius: 6px;
+    margin-top: 44px;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  .ex-title {
+    color: var(--red);
+    font-size: 16px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 6px;
+    margin-top: 30px;
+    margin-bottom: 16px;
+  }
+  .item {
+    margin-bottom: 14px;
+    padding: 14px 16px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--kraft-deep);
+    border-radius: 6px;
+    transition: border-color .2s, background .2s;
+  }
+  .item.correct { border-left-color: var(--green); background: var(--green-bg); }
+  .item.incorrect { border-left-color: var(--red); background: var(--red-bg); }
+  .q {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 15px;
+  }
+  .opt {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 6px;
+    padding: 8px 12px;
+    background: var(--kraft);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14.5px;
+    color: var(--ink);
+    transition: background .15s, border-color .15s;
+  }
+  .opt:hover { background: #fff3e6; border-color: var(--red); }
+  .opt.selected { background: #fbe9c8; border-color: var(--ink-mute); font-weight: bold; }
+  .opt:disabled { cursor: default; }
+  .opt.show-correct { background: var(--green-bg); border-color: var(--green); font-weight: bold; }
+  .opt.show-wrong { background: var(--red-bg); border-color: var(--red); }
+  .blank-input {
+    border: none;
+    border-bottom: 2px dotted var(--red);
+    background: transparent;
+    font-family: inherit;
+    font-size: 14.5px;
+    color: var(--ink);
+    padding: 2px 4px;
+    width: 160px;
+    outline: none;
+  }
+  .blank-input:focus { border-bottom-color: var(--ink); }
+  .blank-input.correct-input { border-bottom: 2px solid var(--green); background: var(--green-bg); }
+  .blank-input.incorrect-input { border-bottom: 2px solid var(--red); background: var(--red-bg); }
+  .note {
+    font-size: 12.5px;
+    color: var(--ink-mute);
+    font-style: italic;
+    margin-top: 6px;
+  }
+  .explain {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border);
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    display: none;
+  }
+  .explain.show { display: block; }
+  .explain b { color: var(--ink); }
+  table.rel {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 8px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  table.rel th {
+    background: var(--kraft-deep);
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  table.rel td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .rel-select {
+    font-family: inherit;
+    font-size: 13.5px;
+    padding: 4px 6px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--kraft);
+  }
+  .rel-select.correct-input { border: 2px solid var(--green); background: var(--green-bg); }
+  .rel-select.incorrect-input { border: 2px solid var(--red); background: var(--red-bg); }
+
+  .submit-bar {
+    position: sticky;
+    bottom: 18px;
+    text-align: center;
+    margin-top: 50px;
+  }
+  .submit-btn {
+    background: var(--red);
+    color: #fff;
+    border: none;
+    padding: 14px 40px;
+    font-size: 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    box-shadow: 0 4px 14px rgba(176,58,46,0.35);
+    transition: transform .15s, background .15s;
+  }
+  .submit-btn:hover { background: var(--red-deep); transform: translateY(-1px); }
+  .submit-btn:disabled { opacity: 0.5; cursor: default; }
+
+  .score-card {
+    display: none;
+    text-align: center;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin-top: 30px;
+  }
+  .score-card.show { display: block; }
+  .score-num {
+    font-size: 44px;
+    font-weight: bold;
+    color: var(--red);
+  }
+  .score-label {
+    color: var(--ink-soft);
+    font-size: 14px;
+    margin-top: 4px;
+  }
+  .retry-btn {
+    margin-top: 16px;
+    background: transparent;
+    border: 1px solid var(--ink-mute);
+    color: var(--ink-soft);
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13.5px;
+  }
+  .retry-btn:hover { background: var(--kraft-deep); }
+  footer {
+    text-align: center;
+    margin-top: 60px;
+    color: var(--ink-mute);
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+  .unanswered-hint {
+    color: var(--red);
+    font-size: 13px;
+    text-align: center;
+    margin-top: 10px;
+    display: none;
+  }
+  .unanswered-hint.show { display: block; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">LLEVAR · VS · LLEVARSE</div>
+    <h1>Ejercicios interactivos</h1>
+    <div class="subtitle">Práctica adicional · Niveles A1 → A2</div>
+    <div class="badge">文法診療室 · 動詞篇</div>
+  </header>
+
+  <!-- BLOQUE 1 -->
+  <div class="block-title">BLOQUE 1 · Nivel A1 — Calentamiento</div>
+
+  <div class="ex-title">Ejercicio 1.1 · ¿Qué frase es correcta?</div>
+
+  <div class="item" data-qid="q1_1">
+    <div class="q">(1) ¿Qué ropa lleva Carlos hoy?</div>
+    <button class="opt" data-val="a" data-correct="true">(a) Carlos lleva una chaqueta marrón.</button>
+    <button class="opt" data-val="b">(b) Carlos se lleva una chaqueta marrón.</button>
+    <div class="explain"><b>Respuesta correcta: (a).</b> Llevar + ropa/accesorios indica qué llevas puesto. "Llevarse" algo en este contexto significaría comprarlo o llevárselo consigo, no vestirlo.</div>
+  </div>
+
+  <div class="item" data-qid="q1_2">
+    <div class="q">(2) ¿Desde cuándo vive Elena en Taichung?</div>
+    <button class="opt" data-val="a" data-correct="true">(a) Elena lleva tres meses viviendo en Taichung.</button>
+    <button class="opt" data-val="b">(b) Elena se lleva tres meses viviendo en Taichung.</button>
+    <div class="explain"><b>Respuesta correcta: (a).</b> Llevar + tiempo + gerundio expresa una acción que continúa hasta el presente. No es un uso reflexivo, así que no se usa "llevarse".</div>
+  </div>
+
+  <div class="item" data-qid="q1_3">
+    <div class="q">(3) ¿Qué ingredientes tiene la sopa?</div>
+    <button class="opt" data-val="a" data-correct="true">(a) La sopa lleva pollo, zanahoria y cebolla.</button>
+    <button class="opt" data-val="b">(b) La sopa se lleva pollo, zanahoria y cebolla.</button>
+    <div class="explain"><b>Respuesta correcta: (a).</b> Llevar = contener ingredientes. La sopa no "se lleva" a ningún lado en este contexto, simplemente los contiene.</div>
+  </div>
+
+  <div class="item" data-qid="q1_4">
+    <div class="q">(4) ¿Qué peinado tiene Sofía hoy?</div>
+    <button class="opt" data-val="a" data-correct="true">(a) Sofía lleva una coleta alta.</button>
+    <button class="opt" data-val="b">(b) Sofía se lleva una coleta alta.</button>
+    <div class="explain"><b>Respuesta correcta: (a).</b> Llevar + peinado describe qué peinado tiene puesto la persona, igual que con la ropa.</div>
+  </div>
+
+  <div class="ex-title">Ejercicio 1.2 · Rellena el hueco (llevar en presente)</div>
+
+  <div class="item" data-qid="f1_1">
+    1. Mi hermano <input type="text" class="blank-input" data-answer="lleva"> (llevar) gafas nuevas.
+    <div class="explain"><b>Respuesta: lleva.</b> Él/ella + llevar en presente = lleva. Aquí indica una prenda/accesorio que se lleva puesto.</div>
+  </div>
+  <div class="item" data-qid="f1_2">
+    2. Nosotros <input type="text" class="blank-input" data-answer="llevamos"> (llevar) dos años en esta empresa.
+    <div class="explain"><b>Respuesta: llevamos.</b> Nosotros + llevar = llevamos. Llevar + tiempo (sin gerundio aquí) también puede indicar duración.</div>
+  </div>
+  <div class="item" data-qid="f1_3">
+    3. ¿Tú <input type="text" class="blank-input" data-answer="llevas"> (llevar) paraguas? Va a llover.
+    <div class="explain"><b>Respuesta: llevas.</b> Tú + llevar = llevas. Aquí llevar significa "tener contigo" un objeto.</div>
+  </div>
+  <div class="item" data-qid="f1_4">
+    4. El pastel <input type="text" class="blank-input" data-answer="lleva"> (llevar) chocolate y nueces.
+    <div class="explain"><b>Respuesta: lleva.</b> Llevar = contener ingredientes, igual que en el ejercicio 1.1.3.</div>
+  </div>
+  <div class="item" data-qid="f1_5">
+    5. Vosotros <input type="text" class="blank-input" data-answer="lleváis"> (llevar) uniforme en el colegio.
+    <div class="explain"><b>Respuesta: lleváis.</b> Vosotros + llevar = lleváis. Llevar + ropa describe lo que se viste habitualmente.</div>
+  </div>
+
+  <div class="ex-title">Ejercicio 1.3 · Relaciona la columna A con la B</div>
+  <table class="rel">
+    <tr><th>Columna A</th><th>Tu respuesta</th></tr>
+    <tr><td>1. Lleva un traje gris</td><td>
+      <select class="rel-select" data-qid="r1_1" data-answer="b">
+        <option value="">— elige —</option>
+        <option value="a">a) peinado</option>
+        <option value="b">b) ropa</option>
+        <option value="c">c) tiempo + gerundio (acción continuada)</option>
+        <option value="d">d) ingrediente</option>
+      </select>
+    </td></tr>
+    <tr><td>2. Lleva dos años casado</td><td>
+      <select class="rel-select" data-qid="r1_2" data-answer="c">
+        <option value="">— elige —</option>
+        <option value="a">a) peinado</option>
+        <option value="b">b) ropa</option>
+        <option value="c">c) tiempo + gerundio (acción continuada)</option>
+        <option value="d">d) ingrediente</option>
+      </select>
+    </td></tr>
+    <tr><td>3. Lleva trenzas</td><td>
+      <select class="rel-select" data-qid="r1_3" data-answer="a">
+        <option value="">— elige —</option>
+        <option value="a">a) peinado</option>
+        <option value="b">b) ropa</option>
+        <option value="c">c) tiempo + gerundio (acción continuada)</option>
+        <option value="d">d) ingrediente</option>
+      </select>
+    </td></tr>
+    <tr><td>4. Lleva tomate y queso</td><td>
+      <select class="rel-select" data-qid="r1_4" data-answer="d">
+        <option value="">— elige —</option>
+        <option value="a">a) peinado</option>
+        <option value="b">b) ropa</option>
+        <option value="c">c) tiempo + gerundio (acción continuada)</option>
+        <option value="d">d) ingrediente</option>
+      </select>
+    </td></tr>
+  </table>
+  <div class="item" style="border-left-color:var(--kraft-deep)">
+    <div class="explain show"><b>Pista:</b> 1-ropa, 2-tiempo+gerundio, 3-peinado, 4-ingrediente. Al pulsar "Enviar respuestas" verás si lo elegiste bien.</div>
+  </div>
+
+  <!-- BLOQUE 2 -->
+  <div class="block-title">BLOQUE 2 · Nivel A2 — Llevarse y pronombres</div>
+
+  <div class="ex-title">Ejercicio 2.1 · ¿Qué frase es correcta?</div>
+
+  <div class="item" data-qid="q2_1">
+    <div class="q">(1) En la tienda, Marta decide comprar dos camisetas. ¿Qué dice?</div>
+    <button class="opt" data-val="a">(a) Marta lleva estas dos camisetas.</button>
+    <button class="opt" data-val="b" data-correct="true">(b) Marta se lleva estas dos camisetas.</button>
+    <div class="explain"><b>Respuesta correcta: (b).</b> Llevarse = decidir comprar algo. "Se lleva" indica que ya tomó la decisión de adquirirlas, no que las está vistiendo en ese momento.</div>
+  </div>
+
+  <div class="item" data-qid="q2_2">
+    <div class="q">(2) Pedro y su jefe tienen buena relación. ¿Cómo lo describimos?</div>
+    <button class="opt" data-val="a">(a) Pedro lleva muy bien con su jefe.</button>
+    <button class="opt" data-val="b" data-correct="true">(b) Pedro se lleva muy bien con su jefe.</button>
+    <div class="explain"><b>Respuesta correcta: (b).</b> Llevarse bien/mal con alguien describe la calidad de una relación interpersonal. Es obligatorio el "se".</div>
+  </div>
+
+  <div class="item" data-qid="q2_3">
+    <div class="q">(3) David ya eligió los pantalones, y ahora habla con el pronombre.</div>
+    <button class="opt" data-val="a">(a) David los lleva.</button>
+    <button class="opt" data-val="b" data-correct="true">(b) David se los lleva.</button>
+    <div class="explain"><b>Respuesta correcta: (b).</b> "Se los lleva" = decisión de compra con pronombre COD (los = los pantalones). "Los lleva" sin "se" significaría que los tiene puestos.</div>
+  </div>
+
+  <div class="ex-title">Ejercicio 2.2 · Rellena el hueco (llevar / llevarse + pronombres)</div>
+
+  <div class="item" data-qid="f2_1">
+    1. — ¿Te gustan estos zapatos? — Sí, <input type="text" class="blank-input" data-answer="me los llevo" style="width:200px"> .
+    <div class="explain"><b>Respuesta: me los llevo.</b> Llevarse + COD (los zapatos) para expresar la decisión de compra.</div>
+  </div>
+  <div class="item" data-qid="f2_2">
+    2. Ana y su compañera <input type="text" class="blank-input" data-answer="se llevan"> muy bien.
+    <div class="explain"><b>Respuesta: se llevan.</b> Llevarse bien/mal = relación entre personas, sujeto plural → se llevan.</div>
+  </div>
+  <div class="item" data-qid="f2_3">
+    3. — ¿Qué lleva esta tarta? — <input type="text" class="blank-input" data-answer="lleva"> fresas y nata.
+    <div class="explain"><b>Respuesta: lleva.</b> Llevar = contener ingrediente, sin "se" porque la tarta no decide nada ni tiene relaciones.</div>
+  </div>
+  <div class="item" data-qid="f2_4">
+    4. Voy a comprar la falda; <input type="text" class="blank-input" data-answer="me la llevo" style="width:200px"> ahora mismo.
+    <div class="explain"><b>Respuesta: me la llevo.</b> Llevarse + COD (la falda, femenino singular) = decisión de compra.</div>
+  </div>
+  <div class="item" data-qid="f2_5">
+    5. Lily prepara la comida de sus gatos y <input type="text" class="blank-input" data-answer="se la lleva" style="width:200px"> a la cocina.
+    <div class="explain"><b>Respuesta sugerida: se la lleva</b> (refiriéndose a "la comida"). Si prefieres referirte a "los tápers", la forma sería "se los lleva" — ajusta el pronombre según el sustantivo que uses en tu propia versión de la historia.</div>
+  </div>
+
+  <div class="ex-title">Ejercicio 2.3 · Relaciona la frase con su uso gramatical</div>
+  <table class="rel">
+    <tr><th>Frase</th><th>Tu respuesta</th></tr>
+    <tr><td>1. Me los llevo</td><td>
+      <select class="rel-select" data-qid="r2_1" data-answer="b">
+        <option value="">— elige —</option>
+        <option value="a">a) llevarse bien/mal — relación</option>
+        <option value="b">b) llevarse + COD (decisión de compra)</option>
+        <option value="c">c) llevar + COI + COD juntos</option>
+        <option value="d">d) llevar + tiempo + gerundio</option>
+      </select>
+    </td></tr>
+    <tr><td>2. Se lleva fatal con su vecino</td><td>
+      <select class="rel-select" data-qid="r2_2" data-answer="a">
+        <option value="">— elige —</option>
+        <option value="a">a) llevarse bien/mal — relación</option>
+        <option value="b">b) llevarse + COD (decisión de compra)</option>
+        <option value="c">c) llevar + COI + COD juntos</option>
+        <option value="d">d) llevar + tiempo + gerundio</option>
+      </select>
+    </td></tr>
+    <tr><td>3. Os los llevo ahora mismo</td><td>
+      <select class="rel-select" data-qid="r2_3" data-answer="c">
+        <option value="">— elige —</option>
+        <option value="a">a) llevarse bien/mal — relación</option>
+        <option value="b">b) llevarse + COD (decisión de compra)</option>
+        <option value="c">c) llevar + COI + COD juntos</option>
+        <option value="d">d) llevar + tiempo + gerundio</option>
+      </select>
+    </td></tr>
+    <tr><td>4. Lleva tres años aprendiendo español</td><td>
+      <select class="rel-select" data-qid="r2_4" data-answer="d">
+        <option value="">— elige —</option>
+        <option value="a">a) llevarse bien/mal — relación</option>
+        <option value="b">b) llevarse + COD (decisión de compra)</option>
+        <option value="c">c) llevar + COI + COD juntos</option>
+        <option value="d">d) llevar + tiempo + gerundio</option>
+      </select>
+    </td></tr>
+  </table>
+
+  <!-- BLOQUE 3 -->
+  <div class="block-title">BLOQUE 3 · Mixto — Repaso final (A1+A2)</div>
+
+  <div class="ex-title">Ejercicio 3.1 · ¿Qué frase es correcta?</div>
+
+  <div class="item" data-qid="q3_1">
+    <div class="q">(1) Roberto quiere comprar el reloj de la vitrina.</div>
+    <button class="opt" data-val="a">(a) Roberto lleva el reloj.</button>
+    <button class="opt" data-val="b" data-correct="true">(b) Roberto se lleva el reloj.</button>
+    <div class="explain"><b>Respuesta correcta: (b).</b> Decisión de compra → llevarse.</div>
+  </div>
+  <div class="item" data-qid="q3_2">
+    <div class="q">(2) ¿Qué hay dentro de esta empanada?</div>
+    <button class="opt" data-val="a" data-correct="true">(a) Lleva carne y huevo.</button>
+    <button class="opt" data-val="b">(b) Se lleva carne y huevo.</button>
+    <div class="explain"><b>Respuesta correcta: (a).</b> Ingrediente → llevar, sin "se".</div>
+  </div>
+  <div class="item" data-qid="q3_3">
+    <div class="q">(3) Los gemelos Tomás y Lucas nunca discuten; se entienden perfecto.</div>
+    <button class="opt" data-val="a">(a) Tomás lleva genial con Lucas.</button>
+    <button class="opt" data-val="b" data-correct="true">(b) Tomás se lleva genial con Lucas.</button>
+    <div class="explain"><b>Respuesta correcta: (b).</b> Relación entre personas → llevarse bien/genial.</div>
+  </div>
+  <div class="item" data-qid="q3_4">
+    <div class="q">(4) Hace cinco años que Carla trabaja en el banco.</div>
+    <button class="opt" data-val="a" data-correct="true">(a) Carla lleva cinco años trabajando en el banco.</button>
+    <button class="opt" data-val="b">(b) Carla se lleva cinco años trabajando en el banco.</button>
+    <div class="explain"><b>Respuesta correcta: (a).</b> Llevar + tiempo + gerundio, sin "se".</div>
+  </div>
+
+  <div class="ex-title">Ejercicio 3.2 · Rellena el hueco (llevar o llevarse)</div>
+
+  <div class="item" data-qid="f3_1">
+    1. Daniel <input type="text" class="blank-input" data-answer="lleva"> una camisa azul y una corbata roja.
+    <div class="explain"><b>Respuesta: lleva.</b> Ropa puesta → llevar.</div>
+  </div>
+  <div class="item" data-qid="f3_2">
+    2. — ¿Qué falda prefieres? — <input type="text" class="blank-input" data-answer="me llevo" style="width:200px"> esta, es más bonita.
+    <div class="explain"><b>Respuesta: me llevo.</b> Decisión de compra → llevarse.</div>
+  </div>
+  <div class="item" data-qid="f3_3">
+    3. Mis padres <input type="text" class="blank-input" data-answer="llevan"> treinta años casados.
+    <div class="explain"><b>Respuesta: llevan.</b> Llevar + tiempo (acción continuada), sin "se".</div>
+  </div>
+  <div class="item" data-qid="f3_4">
+    4. El arroz frito <input type="text" class="blank-input" data-answer="lleva"> huevo, gambas y verduras.
+    <div class="explain"><b>Respuesta: lleva.</b> Ingrediente → llevar.</div>
+  </div>
+  <div class="item" data-qid="f3_5">
+    5. Mi gata y el gato del vecino <input type="text" class="blank-input" data-answer="se llevan"> fenomenal; siempre juegan juntos.
+    <div class="explain"><b>Respuesta: se llevan.</b> Relación entre animales/personas → llevarse bien.</div>
+  </div>
+  <div class="item" data-qid="f3_6">
+    6. ¿<input type="text" class="blank-input" data-answer="llevas"> (tú) los documentos a la oficina, por favor?
+    <div class="explain"><b>Respuesta: llevas.</b> Llevar + objeto + a lugar = transportar algo a un sitio.</div>
+  </div>
+
+  <div class="ex-title">Ejercicio 3.3 · Relaciona la frase con su uso (repaso completo)</div>
+  <table class="rel">
+    <tr><th>Frase</th><th>Tu respuesta</th></tr>
+    <tr><td>1. Lleva el periódico a su abuela</td><td>
+      <select class="rel-select" data-qid="r3_1" data-answer="a">
+        <option value="">— elige —</option>
+        <option value="a">a) llevar + objeto + a persona/lugar</option>
+        <option value="b">b) llevarse bien/mal</option>
+        <option value="c">c) llevar + tiempo + gerundio</option>
+        <option value="d">d) llevarse + COD (decisión de compra)</option>
+        <option value="e">e) llevar = contener ingrediente</option>
+      </select>
+    </td></tr>
+    <tr><td>2. Se lleva mal con su hermana</td><td>
+      <select class="rel-select" data-qid="r3_2" data-answer="b">
+        <option value="">— elige —</option>
+        <option value="a">a) llevar + objeto + a persona/lugar</option>
+        <option value="b">b) llevarse bien/mal</option>
+        <option value="c">c) llevar + tiempo + gerundio</option>
+        <option value="d">d) llevarse + COD (decisión de compra)</option>
+        <option value="e">e) llevar = contener ingrediente</option>
+      </select>
+    </td></tr>
+    <tr><td>3. Llevo diez minutos esperando</td><td>
+      <select class="rel-select" data-qid="r3_3" data-answer="c">
+        <option value="">— elige —</option>
+        <option value="a">a) llevar + objeto + a persona/lugar</option>
+        <option value="b">b) llevarse bien/mal</option>
+        <option value="c">c) llevar + tiempo + gerundio</option>
+        <option value="d">d) llevarse + COD (decisión de compra)</option>
+        <option value="e">e) llevar = contener ingrediente</option>
+      </select>
+    </td></tr>
+    <tr><td>4. Me lo llevo</td><td>
+      <select class="rel-select" data-qid="r3_4" data-answer="d">
+        <option value="">— elige —</option>
+        <option value="a">a) llevar + objeto + a persona/lugar</option>
+        <option value="b">b) llevarse bien/mal</option>
+        <option value="c">c) llevar + tiempo + gerundio</option>
+        <option value="d">d) llevarse + COD (decisión de compra)</option>
+        <option value="e">e) llevar = contener ingrediente</option>
+      </select>
+    </td></tr>
+    <tr><td>5. Esta pizza lleva piña</td><td>
+      <select class="rel-select" data-qid="r3_5" data-answer="e">
+        <option value="">— elige —</option>
+        <option value="a">a) llevar + objeto + a persona/lugar</option>
+        <option value="b">b) llevarse bien/mal</option>
+        <option value="c">c) llevar + tiempo + gerundio</option>
+        <option value="d">d) llevarse + COD (decisión de compra)</option>
+        <option value="e">e) llevar = contener ingrediente</option>
+      </select>
+    </td></tr>
+  </table>
+
+  <div class="submit-bar">
+    <button class="submit-btn" id="submitBtn">Enviar respuestas</button>
+    <div class="unanswered-hint" id="unansweredHint">Aún tienes preguntas sin responder, pero puedes enviarlo igual.</div>
+  </div>
+
+  <div class="score-card" id="scoreCard">
+    <div class="score-num" id="scoreNum">0 / 0</div>
+    <div class="score-label">respuestas correctas</div>
+    <button class="retry-btn" id="retryBtn">Volver a intentar</button>
+  </div>
+
+  <footer>✧ SPANISHLU · 戀上西班牙語 ✧</footer>
+</div>
+
+<script>
+(function () {
+  var submitBtn = document.getElementById('submitBtn');
+  var scoreCard = document.getElementById('scoreCard');
+  var scoreNum = document.getElementById('scoreNum');
+  var retryBtn = document.getElementById('retryBtn');
+  var unansweredHint = document.getElementById('unansweredHint');
+
+  function normalize(str) {
+    return str.toLowerCase().trim()
+      .replace(/á/g,'a').replace(/é/g,'e').replace(/í/g,'i').replace(/ó/g,'o').replace(/ú/g,'u')
+      .replace(/\s+/g, ' ');
+  }
+
+  // multiple-choice buttons: click to select
+  document.querySelectorAll('.item[data-qid]').forEach(function (item) {
+    var opts = item.querySelectorAll('.opt');
+    if (!opts.length) return;
+    opts.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        opts.forEach(function (o) { o.classList.remove('selected'); });
+        btn.classList.add('selected');
+        item.dataset.userVal = btn.dataset.val;
+      });
+    });
+  });
+
+  function gradeAll() {
+    var total = 0, correct = 0;
+    var anyUnanswered = false;
+
+    // multiple choice
+    document.querySelectorAll('.item[data-qid]').forEach(function (item) {
+      var opts = item.querySelectorAll('.opt');
+      if (!opts.length) return;
+      total++;
+      var userVal = item.dataset.userVal;
+      var correctBtn = item.querySelector('.opt[data-correct="true"]');
+      if (!userVal) anyUnanswered = true;
+      opts.forEach(function (o) { o.disabled = true; });
+      if (correctBtn) correctBtn.classList.add('show-correct');
+      if (correctBtn && userVal === correctBtn.dataset.val) {
+        correct++;
+        item.classList.add('correct');
+      } else {
+        item.classList.add('incorrect');
+        if (userVal) {
+          opts.forEach(function (o) {
+            if (o.dataset.val === userVal) o.classList.add('show-wrong');
+          });
+        }
+      }
+      var explainEl = item.querySelector('.explain');
+      if (explainEl) explainEl.classList.add('show');
+    });
+
+    // fill-in-the-blank
+    document.querySelectorAll('.blank-input').forEach(function (input) {
+      total++;
+      var item = input.closest('.item');
+      var userVal = normalize(input.value || '');
+      var correctVal = normalize(input.dataset.answer);
+      var isCorrect = (userVal === correctVal);
+      if (!userVal) anyUnanswered = true;
+      input.disabled = true;
+      if (isCorrect) {
+        correct++;
+        input.classList.add('correct-input');
+        if (item) item.classList.add('correct');
+      } else {
+        input.classList.add('incorrect-input');
+        if (item) item.classList.add('incorrect');
+      }
+      if (item) {
+        var explainEl = item.querySelector('.explain');
+        if (explainEl) explainEl.classList.add('show');
+      }
+    });
+
+    // relational dropdowns
+    document.querySelectorAll('.rel-select').forEach(function (sel) {
+      total++;
+      var correctVal = sel.dataset.answer;
+      sel.disabled = true;
+      if (!sel.value) anyUnanswered = true;
+      if (sel.value === correctVal) {
+        correct++;
+        sel.classList.add('correct-input');
+      } else {
+        sel.classList.add('incorrect-input');
+      }
+    });
+
+    scoreNum.textContent = correct + ' / ' + total;
+    scoreCard.classList.add('show');
+    submitBtn.style.display = 'none';
+    unansweredHint.classList.remove('show');
+    scoreCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  submitBtn.addEventListener('click', gradeAll);
+
+  retryBtn.addEventListener('click', function () {
+    location.reload();
+  });
+})();
+</script>
+</body>
+</html>
