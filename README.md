@@ -39,30 +39,30 @@ spanishlu-grambook/
 ### 2️⃣ 本地開發
 
 ```bash
-# 1. 克隆仓库
+# 1. 克隆倉庫
 git clone https://github.com/Ranjyue/spanishlu-grambook.git
 cd spanishlu-grambook
 
-# 2. 安装依赖
+# 2. 安装依賴
 npm install
 
-# 3. 本地运行
+# 3. 本地運行
 npm run dev
 
-# 4. 访问 http://localhost:8787
+# 4. 訪問 http://localhost:8787
 ```
 
 ### 3️⃣ 部署到 Cloudflare Workers
 
 #### 方案 A：使用 GitHub Actions（推薦）
 
-1. **获取 Cloudflare 凭证**
-   - 访问 [Cloudflare Dashboard](https://dash.cloudflare.com)
+1. **獲取 Cloudflare 憑證**
+   - 訪問 [Cloudflare Dashboard](https://dash.cloudflare.com)
    - 获取你的 **Account ID** 和 **API Token**
 
 2. **添加 GitHub Secrets**
-   - 进入仓库 → Settings → Secrets and variables → Actions
-   - 添加两个密钥：
+   - 進入倉庫 → Settings → Secrets and variables → Actions
+   - 添加兩個密碼：
      - `CLOUDFLARE_API_TOKEN`: 你的 API Token
      - `CLOUDFLARE_ACCOUNT_ID`: 你的 Account ID
 
