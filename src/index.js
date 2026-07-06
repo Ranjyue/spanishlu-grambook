@@ -249,13 +249,12 @@ function handleLesson(slug, request) {
     return new Response('課程不存在', { status: 404 });
   }
 
-  const html = `
-<!DOCTYPE html>
+  const html = `<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>\${lesson.name} - GramBook</title>
+  <title>${lesson.name} - GramBook</title>
   <style>
     * { 
       margin: 0; 
@@ -353,19 +352,24 @@ function handleLesson(slug, request) {
 
     .lesson-content {
       display: none;
-    }
-
-    .lesson-iframe {
       width: 100%;
       height: 100vh;
+      padding: 20px;
+      background: white;
+    }
+
+    .lesson-content iframe {
+      width: 100%;
+      height: 100%;
       border: none;
+      border-radius: 8px;
     }
   </style>
 </head>
 <body>
   <div id="passwordGate" class="password-gate">
     <form class="password-form" onsubmit="verifyPassword(event)">
-      <h2>\${lesson.name}</h2>
+      <h2>${lesson.name}</h2>
       <p>請輸入密碼存取課程</p>
       <div id="errorMessage" class="error"></div>
       <div id="successMessage" class="success"></div>
@@ -381,18 +385,18 @@ function handleLesson(slug, request) {
   </div>
 
   <div id="lessonContent" class="lesson-content">
-    <iframe id="contentFrame" class="lesson-iframe"></iframe>
+    <iframe id="contentFrame"></iframe>
   </div>
 
   <script>
-    const lessonSlug = '\${slug}';
-    const lessonFile = '\${lesson.file}';
+    const lessonSlug = '${slug}';
     
     async function verifyPassword(event) {
       event.preventDefault();
       const password = document.getElementById('passwordInput').value;
       const errorDiv = document.getElementById('errorMessage');
       const successDiv = document.getElementById('successMessage');
+      const passwordInput = document.getElementById('passwordInput');
       
       try {
         const response = await fetch('/api/verify-password', {
@@ -406,44 +410,33 @@ function handleLesson(slug, request) {
         if (result.success) {
           successDiv.textContent = '密碼正確，正在載入課程...';
           errorDiv.textContent = '';
+          passwordInput.disabled = true;
+          
           setTimeout(() => {
             document.getElementById('passwordGate').style.display = 'none';
             document.getElementById('lessonContent').style.display = 'block';
-            loadLessonContent();
-          }, 500);
+            console.log('課程已解鎖');
+          }, 1000);
         } else {
           errorDiv.textContent = '密碼錯誤，請重試';
           successDiv.textContent = '';
-          document.getElementById('passwordInput').value = '';
-          document.getElementById('passwordInput').focus();
+          passwordInput.value = '';
+          passwordInput.focus();
         }
       } catch (error) {
         errorDiv.textContent = '驗證失敗，請稍後重試';
         successDiv.textContent = '';
-        console.error(error);
+        console.error('驗證錯誤:', error);
       }
     }
 
-    function loadLessonContent() {
-      // 這裡可以加載課程 HTML 檔案
-      // 暫時顯示提示訊息
-      const iframe = document.getElementById('contentFrame');
-      // iframe.src = \`/content/\${lessonFile}\`;
-      
-      // 或者直接顯示提示
-      iframe.onload = function() {
-        console.log('課程已載入');
-      };
-    }
-
-    // 自動載入課程內容
-    document.addEventListener('DOMContentLoaded', function() {
-      // 課程內容會通過 handleLesson 返回
+    // 頁面載入時的初始化
+    window.addEventListener('load', function() {
+      console.log('課程頁面已載入，等待密碼驗證');
     });
   </script>
 </body>
-</html>
-  `;
+</html>`;
 
   return new Response(html, {
     headers: { 'Content-Type': 'text/html; charset=utf-8' }
@@ -468,6 +461,7 @@ async function handlePasswordVerification(request) {
       );
     }
 
+    // 直接比較密碼
     const isCorrect = password === correctPassword;
     
     return new Response(
