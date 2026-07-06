@@ -1,23 +1,27 @@
 {
   "name": "spanishlu-grambook",
   "version": "1.0.0",
-  "description": "西語萌萌學園 GramBook - 西班牙語文法互動練習平台",
-  "main": "src/index.js",
-  "type": "module",
-  "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy",
-    "build": "echo 'No build needed for static content'"
-  },
-  "keywords": [
-    "spanish",
-    "grammar",
-    "education",
-    "interactive"
-  ],
-  "author": "Luz Ran Jyue",
-  "license": "MIT",
-  "devDependencies": {
-    "wrangler": "^3.60.0"
+  "lockfileVersion": 3,
+  "requires": true,
+  "packages": {
+    "": {
+      "name": "spanishlu-grambook",
+      "version": "1.0.0",
+      "license": "MIT",
+      "devDependencies": {
+        "wrangler": "^3.60.0"
+      }
+    },
+    "node_modules/wrangler": {
+      "version": "3.60.0",
+      "resolved": "https://registry.npmjs.org/wrangler/-/wrangler-3.60.0.tgz",
+      "integrity": "sha512-...",
+      "bin": {
+        "wrangler": "bin/wrangler.js"
+      },
+      "engines": {
+        "node": ">=16.9.0"
+      }
+    }
   }
 }
