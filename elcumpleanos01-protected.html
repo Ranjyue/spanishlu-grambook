@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GramBook: El Cumpleaños de Lily - DELE A1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* 禁止文本选择 */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* 允许表单和输入框可以选择 */
+        input, textarea, select, button, label {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+
+        /* 水印背景 */
+        body::before {
+            content: '© Luz Ran Jyue • Contenido Protegido • 不得复制 • 著作权所有';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 2.5rem;
+            color: rgba(217, 119, 87, 0.08);
+            font-weight: 700;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 1;
+            width: 200%;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .content-protection-warning {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #d97757;
+            color: white;
+            padding: 0.8rem 1.2rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            z-index: 1000;
+            display: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .content-protection-warning.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* 登入屏幕樣式 */
+        #loginOverlay {
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #fef9f5 0%, #f5ede4 100%);
+            z-index: 9999;
+        }
+
+        #loginOverlay.hidden {
+            display: none;
+        }
+
+        .login-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(217, 119, 87, 0.2);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            border: 2px solid #d97757;
+        }
+
+        .login-container h1 {
+            font-family: 'Playfair Display', serif;
+            color: #d97757;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-container .subtitle {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 2px solid #d97757;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            box-sizing: border-box;
+        }
+
+        .password-input:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(217, 119, 87, 0.3);
+            background-color: #fffbf9;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 1rem;
+            background-color: #d97757;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .login-button:hover {
+            background-color: #c73e1d;
+        }
+
+        .error-message {
+            color: #dc3545;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+            animation: shake 0.3s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        /* 內容隱藏 */
+        #content.hidden {
+            display: none;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #fef9f5;
+            color: #2c2416;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* HEADER */
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 3px solid #d97757;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: #d97757;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .level-badge {
+            display: inline-block;
+            background-color: #d97757;
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* SECCIONES */
+        section {
+            margin: 3rem 0;
+            background-color: rgba(217, 119, 87, 0.08);
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 4px solid #d97757;
+        }
+
+        section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #d97757;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #d97757;
+        }
+
+        /* CUENTO */
+        .story {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 8px;
+            line-height: 2;
+            font-size: 1.05rem;
+            /* 额外保护 - 防止拖拽 */
+            -webkit-user-drag: none;
+        }
+
+        .story p {
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+
+        .story strong {
+            color: #d97757;
+            font-weight: 700;
+        }
+
+        /* PREGUNTAS */
+        .question-block {
+            background-color: white;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            border-left: 4px solid #d97757;
+        }
+
+        .question-number {
+            font-family: 'Caveat', cursive;
+            font-size: 1.8rem;
+            color: #d97757;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            color: #2c2416;
+        }
+
+        .options {
+            margin-left: 1.5rem;
+        }
+
+        .option {
+            margin: 0.8rem 0;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .option input[type="radio"] {
+            margin-right: 1rem;
+            margin-top: 0.3rem;
+            accent-color: #d97757;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            -webkit-user-select: auto;
+            -moz-user-select: auto;
+            user-select: auto;
+        }
+
+        .option label {
+            cursor: pointer;
+            flex-grow: 1;
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            user-select: text;
+        }
+
+        .feedback {
+            margin-top: 1.2rem;
+            padding: 1.2rem;
+            border-radius: 6px;
+            display: none;
+            font-weight: 600;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background-color: rgba(76, 175, 80, 0.2);
+            color: #2d5016;
+            border-left: 4px solid #4caf50;
+        }
+
+        .feedback.incorrect {
+            background-color: rgba(220, 53, 69, 0.15);
+            color: #721c24;
+            border-left: 4px solid #dc3545;
+        }
+
+        /* EJERCICIOS */
+        .exercise-block {
+            background-color: white;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .exercise-title {
+            font-family: 'Caveat', cursive;
+            font-size: 1.5rem;
+            color: #d97757;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .exercise-instruction {
+            background-color: rgba(217, 119, 87, 0.1);
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1.2rem;
+            font-style: italic;
+            color: #555;
+        }
+
+        .exercise-item {
+            margin: 1.2rem 0;
+            padding: 1rem;
+            background-color: #f9f5f0;
+            border-radius: 6px;
+        }
+
+        .exercise-item label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .exercise-item input[type="text"],
+        .exercise-item select {
+            width: 100%;
+            padding: 0.6rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #d97757;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            user-select: text;
+        }
+
+        .exercise-feedback {
+            margin-top: 1rem;
+            padding: 0.8rem;
+            background-color: rgba(217, 119, 87, 0.15);
+            border-radius: 4px;
+            display: none;
+        }
+
+        .exercise-feedback.show {
+            display: block;
+        }
+
+        /* TABS */
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #d97757;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            padding: 0.8rem 1.5rem;
+            background-color: transparent;
+            color: #d97757;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-button.active {
+            border-bottom-color: #d97757;
+            background-color: rgba(217, 119, 87, 0.1);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 0.9rem 1.8rem;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            background-color: #d97757;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            user-select: text;
+        }
+
+        button:hover {
+            background-color: #c73e1d;
+        }
+
+        .grammatical-note {
+            background-color: rgba(217, 119, 87, 0.1);
+            padding: 1.2rem;
+            border-radius: 6px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #d97757;
+        }
+
+        .grammatical-note h4 {
+            color: #d97757;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .result-summary {
+            background-color: rgba(217, 119, 87, 0.2);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .result-summary.show {
+            display: block;
+        }
+
+        .result-summary h3 {
+            font-size: 1.8rem;
+            color: #d97757;
+            margin-bottom: 1rem;
+        }
+
+        .result-percentage {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #d97757;
+            margin: 1rem 0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 2px solid #d97757;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            section h2 {
+                font-size: 1.5rem;
+            }
+            .container {
+                padding: 1rem;
+            }
+            .tabs {
+                flex-direction: column;
+            }
+            .button-group {
+                flex-direction: column;
+            }
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 保護警告 -->
+    <div class="content-protection-warning" id="protectionWarning">
+        ⚠️ 內容受著作權保護，不得複製或截圖
+    </div>
+
+    <!-- 登入屏幕 -->
+    <div id="loginOverlay">
+        <div class="login-container">
+            <h1>🔐 GramBook</h1>
+            <p class="subtitle">Ingresa tu contraseña de acceso</p>
+            <input 
+                type="password" 
+                id="passwordInput" 
+                class="password-input" 
+                placeholder="Contraseña"
+                onkeypress="if(event.key==='Enter') checkPassword()"
+                autocomplete="off"
+            >
+            <button class="login-button" onclick="checkPassword()">Acceder</button>
+            <p class="error-message" id="errorMsg">❌ Contraseña incorrecta, intenta de nuevo</p>
+        </div>
+    </div>
+
+    <!-- 實際課程內容 -->
+    <div id="content" class="hidden">
+        <div class="container">
+            <header>
+                <h1>GramBook</h1>
+                <p class="subtitle">Pronombres de Objeto Directo (POD) e Indirecto (POI)</p>
+                <span class="level-badge">DELE A1</span>
+            </header>
+
+            <!-- TABS -->
+            <div class="tabs">
+                <button class="tab-button active" onclick="switchTab('story')">📖 Cuento</button>
+                <button class="tab-button" onclick="switchTab('comprehension')">❓ Preguntas</button>
+                <button class="tab-button" onclick="switchTab('exercises')">✏️ Ejercicios</button>
+                <button class="tab-button" onclick="switchTab('summary')">📊 Resumen</button>
+            </div>
+
+            <!-- TAB 1: CUENTO -->
+            <div id="story" class="tab-content active">
+                <section>
+                    <h2>📖 El Cumpleaños de Lily</h2>
+                    
+                    <div class="story">
+                        <p>
+                            Lily es una chica de dieciocho años. Le gusta hacer muchas cosas, como viajar, escribir y el deporte. Es cosmopolita y sociable. Sobre todo es curiosa.
+                        </p>
+
+                        <p>
+                            Hoy es su cumpleaños. En la fiesta de cumpleaños, Lily recibe muchos regalos; un gato persa, un billete de avión para viajar por España, un apartamento en Taipéi, una cafetería y unos casetes de edición limitada.
+                        </p>
+
+                        <p>
+                            El gato persa ahora tiene un nombre, se llama Nieve, porque es blanca y elegante. <strong>Se lo ha regalado su mejor amiga Elena.</strong>
+                        </p>
+
+                        <p>
+                            El billete de avión <strong>se lo han regalado sus padres</strong>, porque saben que Lily siempre viaja en las vacaciones de verano, y también porque Lily lleva estudiando español desde los seis años. Ya es hora de ponerse a prueba.
+                        </p>
+
+                        <p>
+                            El apartamento <strong>se lo ha regalado su tío Fernando</strong>, es el hermano pequeño de la mamá de Lily. Piensa que Lily va a necesitar un alojamiento seguro porque a partir de hoy, Lily va a estudiar en la universidad.
+                        </p>
+
+                        <p>
+                            La cafetería <strong>se la han regalado sus abuelos.</strong> Tienen miedo de que su tesoro le falte dinero para disfrutar de la vida.
+                        </p>
+
+                        <p>
+                            Por último, los casetes <strong>se los regala su hermano mayor.</strong> A Lily le fascinan los videojuegos, por eso Álvaro los ha escogido como regalo.
+                        </p>
+
+                        <p>
+                            Lily está muy contenta y feliz por tenerlos en su vida.
+                        </p>
+                    </div>
+                </section>
+            </div>
+
+            <!-- TAB 2: PREGUNTAS DE COMPRENSIÓN -->
+            <div id="comprehension" class="tab-content">
+                <section>
+                    <h2>❓ Preguntas de Comprensión de Lectura</h2>
+
+                    <div class="question-block">
+                        <div class="question-number">Pregunta 1</div>
+                        <div class="question-text">¿Cuántos años tiene Lily?</div>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" id="q1a" name="q1" value="a">
+                                <label for="q1a">a) 16 años</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q1b" name="q1" value="b">
+                                <label for="q1b">b) 18 años</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q1c" name="q1" value="c">
+                                <label for="q1c">c) 20 años</label>
+                            </div>
+                        </div>
+                        <div class="feedback" id="feedback-q1"></div>
+                    </div>
+
+                    <div class="question-block">
+                        <div class="question-number">Pregunta 2</div>
+                        <div class="question-text">¿Cuál NO describe a Lily?</div>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" id="q2a" name="q2" value="a">
+                                <label for="q2a">a) Es curiosa</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q2b" name="q2" value="b">
+                                <label for="q2b">b) Le gusta viajar</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q2c" name="q2" value="c">
+                                <label for="q2c">c) Es tímida</label>
+                            </div>
+                        </div>
+                        <div class="feedback" id="feedback-q2"></div>
+                    </div>
+
+                    <div class="question-block">
+                        <div class="question-number">Pregunta 3</div>
+                        <div class="question-text">¿Quién le regala el gato a Lily?</div>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" id="q3a" name="q3" value="a">
+                                <label for="q3a">a) Sus padres</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q3b" name="q3" value="b">
+                                <label for="q3b">b) Su hermano Álvaro</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q3c" name="q3" value="c">
+                                <label for="q3c">c) Su mejor amiga Elena</label>
+                            </div>
+                        </div>
+                        <div class="feedback" id="feedback-q3"></div>
+                    </div>
+
+                    <div class="question-block">
+                        <div class="question-number">Pregunta 4</div>
+                        <div class="question-text">¿Por qué le regalan el billete de avión?</div>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" id="q4a" name="q4" value="a">
+                                <label for="q4a">a) Porque tienen mucho dinero</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q4b" name="q4" value="b">
+                                <label for="q4b">b) Porque Lily quiere ir a Taiwan</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q4c" name="q4" value="c">
+                                <label for="q4c">c) Porque viaja en verano y estudia español desde los seis años</label>
+                            </div>
+                        </div>
+                        <div class="feedback" id="feedback-q4"></div>
+                    </div>
+
+                    <div class="question-block">
+                        <div class="question-number">Pregunta 5</div>
+                        <div class="question-text">¿Qué podemos inferir sobre el tío Fernando?</div>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" id="q5a" name="q5" value="a">
+                                <label for="q5a">a) Es el hermano mayor de la mamá de Lily</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q5b" name="q5" value="b">
+                                <label for="q5b">b) Cree que Lily necesita un lugar seguro para vivir</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q5c" name="q5" value="c">
+                                <label for="q5c">c) Todas son correctas</label>
+                            </div>
+                        </div>
+                        <div class="feedback" id="feedback-q5"></div>
+                    </div>
+
+                    <div class="question-block">
+                        <div class="question-number">Pregunta 6</div>
+                        <div class="question-text">¿Por qué le regalan la cafetería?</div>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" id="q6a" name="q6" value="a">
+                                <label for="q6a">a) Porque quieren un negocio nuevo</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q6b" name="q6" value="b">
+                                <label for="q6b">b) Tienen miedo de que le falte dinero</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q6c" name="q6" value="c">
+                                <label for="q6c">c) Porque Lily quiere trabajar en una cafetería</label>
+                            </div>
+                        </div>
+                        <div class="feedback" id="feedback-q6"></div>
+                    </div>
+
+                    <div class="question-block">
+                        <div class="question-number">Pregunta 7</div>
+                        <div class="question-text">¿Por qué Álvaro elige los casetes como regalo?</div>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" id="q7a" name="q7" value="a">
+                                <label for="q7a">a) Porque a Álvaro le fascinan los videojuegos</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q7b" name="q7" value="b">
+                                <label for="q7b">b) Porque los casetes son baratos</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q7c" name="q7" value="c">
+                                <label for="q7c">c) Porque a Lily le fascinan los videojuegos</label>
+                            </div>
+                        </div>
+                        <div class="feedback" id="feedback-q7"></div>
+                    </div>
+
+                    <div class="question-block">
+                        <div class="question-number">Pregunta 8</div>
+                        <div class="question-text">¿Cuál es la emoción principal de Lily al final?</div>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" id="q8a" name="q8" value="a">
+                                <label for="q8a">a) Está triste porque recibe muchos regalos</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q8b" name="q8" value="b">
+                                <label for="q8b">b) Está sorprendida pero no muy feliz</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q8c" name="q8" value="c">
+                                <label for="q8c">c) Está muy contenta y feliz por tenerlos en su vida</label>
+                            </div>
+                        </div>
+                        <div class="feedback" id="feedback-q8"></div>
+                    </div>
+
+                    <div class="button-group">
+                        <button onclick="checkComprehension()">✓ Verificar Respuestas</button>
+                        <button onclick="resetComprehension()">↻ Limpiar Respuestas</button>
+                    </div>
+                </section>
+            </div>
+
+            <!-- TAB 3: EJERCICIOS -->
+            <div id="exercises" class="tab-content">
+                <section>
+                    <h2>✏️ Ejercicios de Pronombres</h2>
+
+                    <!-- Ejercicio 1 -->
+                    <div class="exercise-block">
+                        <div class="exercise-title">Ejercicio 1: Identificar POD (Objeto Directo)</div>
+                        <div class="exercise-instruction">Selecciona el pronombre de objeto directo correcto:</div>
+                        
+                        <div class="exercise-item">
+                            <label>1. Lily mira el gato. Lily <strong>___</strong> mira.</label>
+                            <select id="ex1_1" onchange="checkExercise('ex1_1', 'lo')">
+                                <option value="">-- Selecciona --</option>
+                                <option value="lo">lo</option>
+                                <option value="la">la</option>
+                                <option value="los">los</option>
+                                <option value="les">les</option>
+                            </select>
+                            <div class="exercise-feedback" id="feedback-ex1_1"></div>
+                        </div>
+
+                        <div class="exercise-item">
+                            <label>2. Elena regala el gato. Elena <strong>___</strong> regala.</label>
+                            <select id="ex1_2" onchange="checkExercise('ex1_2', 'lo')">
+                                <option value="">-- Selecciona --</option>
+                                <option value="lo">lo</option>
+                                <option value="la">la</option>
+                                <option value="los">los</option>
+                                <option value="les">les</option>
+                            </select>
+                            <div class="exercise-feedback" id="feedback-ex1_2"></div>
+                        </div>
+
+                        <div class="exercise-item">
+                            <label>3. Lily recibe la cafetería. Lily <strong>___</strong> recibe.</label>
+                            <select id="ex1_3" onchange="checkExercise('ex1_3', 'la')">
+                                <option value="">-- Selecciona --</option>
+                                <option value="lo">lo</option>
+                                <option value="la">la</option>
+                                <option value="los">los</option>
+                                <option value="les">les</option>
+                            </select>
+                            <div class="exercise-feedback" id="feedback-ex1_3"></div>
+                        </div>
+                    </div>
+
+                    <!-- Ejercicio 2 -->
+                    <div class="exercise-block">
+                        <div class="exercise-title">Ejercicio 2: Identificar POI (Objeto Indirecto)</div>
+                        <div class="exercise-instruction">Selecciona el pronombre de objeto indirecto correcto:</div>
+                        
+                        <div class="exercise-item">
+                            <label>1. Elena regala un gato a Lily. Elena <strong>___</strong> regala un gato.</label>
+                            <select id="ex2_1" onchange="checkExercise('ex2_1', 'le')">
+                                <option value="">-- Selecciona --</option>
+                                <option value="le">le</option>
+                                <option value="les">les</option>
+                                <option value="lo">lo</option>
+                                <option value="la">la</option>
+                            </select>
+                            <div class="exercise-feedback" id="feedback-ex2_1"></div>
+                        </div>
+
+                        <div class="exercise-item">
+                            <label>2. Los padres regalan un billete a Lily. Los padres <strong>___</strong> regalan un billete.</label>
+                            <select id="ex2_2" onchange="checkExercise('ex2_2', 'le')">
+                                <option value="">-- Selecciona --</option>
+                                <option value="le">le</option>
+                                <option value="les">les</option>
+                                <option value="lo">lo</option>
+                                <option value="la">la</option>
+                            </select>
+                            <div class="exercise-feedback" id="feedback-ex2_2"></div>
+                        </div>
+
+                        <div class="exercise-item">
+                            <label>3. Los abuelos regalan la cafetería a Lily. Los abuelos <strong>___</strong> regalan la cafetería.</label>
+                            <select id="ex2_3" onchange="checkExercise('ex2_3', 'le')">
+                                <option value="">-- Selecciona --</option>
+                                <option value="le">le</option>
+                                <option value="les">les</option>
+                                <option value="lo">lo</option>
+                                <option value="la">la</option>
+                            </select>
+                            <div class="exercise-feedback" id="feedback-ex2_3"></div>
+                        </div>
+                    </div>
+
+                    <!-- Ejercicio 3 -->
+                    <div class="exercise-block">
+                        <div class="exercise-title">Ejercicio 3: Combinar POD + POI (SE LO/LA/LOS/LAS)</div>
+                        <div class="exercise-instruction">Escribe el pronombre combinado correcto:</div>
+                        
+                        <div class="exercise-item">
+                            <label>1. Elena regala el gato a Lily. Elena <strong>___</strong> regala.</label>
+                            <input type="text" id="ex3_1" placeholder="se lo / se la / se los / se las">
+                            <button onclick="checkTextAnswer('ex3_1', 'se lo', 'feedback-ex3_1')">Verificar</button>
+                            <div class="exercise-feedback" id="feedback-ex3_1"></div>
+                        </div>
+
+                        <div class="exercise-item">
+                            <label>2. Los padres regalan el billete a Lily. Los padres <strong>___</strong> regalan.</label>
+                            <input type="text" id="ex3_2" placeholder="se lo / se la / se los / se las">
+                            <button onclick="checkTextAnswer('ex3_2', 'se lo', 'feedback-ex3_2')">Verificar</button>
+                            <div class="exercise-feedback" id="feedback-ex3_2"></div>
+                        </div>
+
+                        <div class="exercise-item">
+                            <label>3. El tío regala el apartamento a Lily. El tío <strong>___</strong> regala.</label>
+                            <input type="text" id="ex3_3" placeholder="se lo / se la / se los / se las">
+                            <button onclick="checkTextAnswer('ex3_3', 'se lo', 'feedback-ex3_3')">Verificar</button>
+                            <div class="exercise-feedback" id="feedback-ex3_3"></div>
+                        </div>
+
+                        <div class="exercise-item">
+                            <label>4. Los abuelos regalan la cafetería a Lily. Los abuelos <strong>___</strong> regalan.</label>
+                            <input type="text" id="ex3_4" placeholder="se lo / se la / se los / se las">
+                            <button onclick="checkTextAnswer('ex3_4', 'se la', 'feedback-ex3_4')">Verificar</button>
+                            <div class="exercise-feedback" id="feedback-ex3_4"></div>
+                        </div>
+
+                        <div class="exercise-item">
+                            <label>5. Álvaro regala los casetes a Lily. Álvaro <strong>___</strong> regala.</label>
+                            <input type="text" id="ex3_5" placeholder="se lo / se la / se los / se las">
+                            <button onclick="checkTextAnswer('ex3_5', 'se los', 'feedback-ex3_5')">Verificar</button>
+                            <div class="exercise-feedback" id="feedback-ex3_5"></div>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button onclick="resetExercises()">↻ Limpiar todos los ejercicios</button>
+                    </div>
+                </section>
+            </div>
+
+            <!-- TAB 4: RESUMEN -->
+            <div id="summary" class="tab-content">
+                <section>
+                    <h2>📊 Resumen de Aprendizaje</h2>
+
+                    <div class="grammatical-note">
+                        <h4>🎯 Lo más importante:</h4>
+                        <p>
+                            En este cuento practicaste dos pronombres fundamentales en español:
+                        </p>
+                    </div>
+
+                    <div class="exercise-block">
+                        <h3 style="color: #d97757; margin-bottom: 1rem;">1. POD: Objeto Directo (¿QUÉ?)</h3>
+                        <p><strong>Preguntas:</strong> ¿Qué recibe la acción? ¿A quién/qué?</p>
+                        <p><strong>Pronombres:</strong></p>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><code>lo</code> = cosa/persona masculina singular (el gato → <strong>lo</strong> quiero)</li>
+                            <li><code>la</code> = cosa/persona femenina singular (la cafetería → <strong>la</strong> reciben)</li>
+                            <li><code>los</code> = cosas/personas masculinas plural (los casetes → <strong>los</strong> regala)</li>
+                            <li><code>las</code> = cosas/personas femeninas plural (las emociones → <strong>las</strong> expresa)</li>
+                        </ul>
+                        <p style="margin-top: 1rem;"><strong>Del cuento:</strong> "Lily <strong>lo</strong> mira" (lo = el gato)</p>
+                    </div>
+
+                    <div class="exercise-block">
+                        <h3 style="color: #d97757; margin-bottom: 1rem;">2. POI: Objeto Indirecto (¿A QUIÉN?)</h3>
+                        <p><strong>Preguntas:</strong> ¿A quién le sucede? ¿Para quién es la acción?</p>
+                        <p><strong>Pronombres:</strong></p>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><code>le</code> = a él / a ella (singular)</li>
+                            <li><code>les</code> = a ellos / a ellas (plural)</li>
+                        </ul>
+                        <p style="margin-top: 1rem;"><strong>Del cuento:</strong> "Elena <strong>le</strong> regala un gato" (le = a Lily)</p>
+                    </div>
+
+                    <div class="exercise-block">
+                        <h3 style="color: #d97757; margin-bottom: 1rem;">3. POD + POI: Cuando combinas ambos</h3>
+                        <p><strong>Regla importante:</strong> <code>LE/LES</code> se cambia a <code>SE</code> cuando va con POD</p>
+                        <p><strong>Orden:</strong> SE + POD + VERBO</p>
+                        <table style="width: 100%; margin-top: 1rem; border-collapse: collapse;">
+                            <tr style="background-color: rgba(217, 119, 87, 0.1);">
+                                <th style="padding: 0.8rem; border: 1px solid #d97757;">Frase Original</th>
+                                <th style="padding: 0.8rem; border: 1px solid #d97757;">Con POD + POI</th>
+                            </tr>
+                            <tr style="border: 1px solid #d97757;">
+                                <td style="padding: 0.8rem;">Elena le regala un gato</td>
+                                <td style="padding: 0.8rem;"><strong>Elena se lo regala</strong></td>
+                            </tr>
+                            <tr style="background-color: #f9f5f0;">
+                                <td style="padding: 0.8rem;">Los padres le regalan un billete</td>
+                                <td style="padding: 0.8rem;"><strong>Los padres se lo regalan</strong></td>
+                            </tr>
+                            <tr style="border: 1px solid #d97757;">
+                                <td style="padding: 0.8rem;">Los abuelos le regalan una cafetería</td>
+                                <td style="padding: 0.8rem;"><strong>Los abuelos se la regalan</strong></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="result-summary" id="finalResult">
+                        <h3>Tu Progreso</h3>
+                        <p id="resultText">Completa los ejercicios y preguntas para ver tu calificación.</p>
+                        <div id="scoreDetails" style="margin-top: 1rem;"></div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- FOOTER -->
+            <footer>
+                <p>✧ SpanishLu | 戀上西班牙語 | 西語萌萌學園 con Luz ✧</p>
+                <p>GramBook: "El Cumpleaños de Lily" | Pronombres OD y OI | DELE A1 | © 著作權所有</p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        // ⚠️ 密碼設置
+        const CORRECT_PASSWORD = "YJL-95";
+
+        // 禁止右鍵菜單
+        document.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            showProtectionWarning();
+            return false;
+        });
+
+        // 禁止複製
+        document.addEventListener('copy', (e) => {
+            e.preventDefault();
+            showProtectionWarning();
+            return false;
+        });
+
+        // 禁止選中
+        document.addEventListener('selectstart', (e) => {
+            // 允許表單和輸入框可以選中
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA' && e.target.tagName !== 'SELECT' && e.target.tagName !== 'LABEL') {
+                e.preventDefault();
+                showProtectionWarning();
+            }
+        });
+
+        // 禁止拖拽
+        document.addEventListener('dragstart', (e) => {
+            if (e.target.closest('.story')) {
+                e.preventDefault();
+                showProtectionWarning();
+                return false;
+            }
+        });
+
+        // 禁止開發者工具 (基本檢測)
+        document.addEventListener('keydown', (e) => {
+            // F12
+            if (e.keyCode === 123) {
+                e.preventDefault();
+                showProtectionWarning();
+            }
+            // Ctrl+Shift+I (Inspector)
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+                e.preventDefault();
+                showProtectionWarning();
+            }
+            // Ctrl+Shift+C (Select Element)
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 67) {
+                e.preventDefault();
+                showProtectionWarning();
+            }
+            // Ctrl+Shift+K (Console)
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 75) {
+                e.preventDefault();
+                showProtectionWarning();
+            }
+        });
+
+        // 顯示保護警告
+        function showProtectionWarning() {
+            const warning = document.getElementById('protectionWarning');
+            warning.classList.add('show');
+            setTimeout(() => {
+                warning.classList.remove('show');
+            }, 3000);
+        }
+
+        // 檢查密碼
+        function checkPassword() {
+            const userPassword = document.getElementById('passwordInput').value;
+            const errorMsg = document.getElementById('errorMsg');
+            
+            if(userPassword === CORRECT_PASSWORD) {
+                document.getElementById('loginOverlay').classList.add('hidden');
+                document.getElementById('content').classList.remove('hidden');
+                document.getElementById('passwordInput').value = '';
+            } else {
+                errorMsg.classList.add('show');
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('passwordInput').focus();
+                
+                setTimeout(() => {
+                    errorMsg.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        // TAB SWITCHING
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // COMPREHENSION ANSWERS
+        const comprehensionAnswers = {
+            q1: 'b', q2: 'c', q3: 'c', q4: 'c',
+            q5: 'c', q6: 'b', q7: 'c', q8: 'c'
+        };
+
+        function checkComprehension() {
+            let correctCount = 0;
+            let answeredCount = 0;
+
+            for (let i = 1; i <= 8; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                const feedback = document.getElementById(`feedback-q${i}`);
+
+                if (!selected) {
+                    feedback.textContent = '⚠️ Por favor, selecciona una respuesta.';
+                    feedback.classList.add('show', 'incorrect');
+                    continue;
+                }
+
+                answeredCount++;
+                feedback.classList.remove('correct', 'incorrect');
+                feedback.classList.add('show');
+
+                if (selected.value === comprehensionAnswers[`q${i}`]) {
+                    feedback.classList.add('correct');
+                    feedback.textContent = '✓ ¡Correcto!';
+                    correctCount++;
+                } else {
+                    feedback.classList.add('incorrect');
+                    feedback.textContent = '✗ Incorrecto. Intenta leer el texto nuevamente.';
+                }
+            }
+
+            if (answeredCount === 8) {
+                showFinalResult('comprensión', correctCount, 8);
+            }
+        }
+
+        function resetComprehension() {
+            document.querySelectorAll('input[type="radio"]').forEach(input => input.checked = false);
+            document.querySelectorAll('.feedback').forEach(fb => {
+                fb.classList.remove('show', 'correct', 'incorrect');
+            });
+        }
+
+        // EXERCISE CHECKING
+        function checkExercise(elementId, correctValue) {
+            const element = document.getElementById(elementId);
+            const feedback = document.getElementById(`feedback-${elementId}`);
+            const isCorrect = element.value === correctValue;
+
+            feedback.classList.add('show');
+            if (isCorrect) {
+                feedback.textContent = '✓ ¡Correcto!';
+                feedback.style.background = 'rgba(76, 175, 80, 0.2)';
+                feedback.style.color = '#2d5016';
+            } else {
+                feedback.textContent = `✗ Incorrecto. La respuesta correcta es: ${correctValue}`;
+                feedback.style.background = 'rgba(220, 53, 69, 0.15)';
+                feedback.style.color = '#721c24';
+            }
+        }
+
+        function checkTextAnswer(elementId, correctAnswer, feedbackId) {
+            const element = document.getElementById(elementId);
+            const feedback = document.getElementById(feedbackId);
+            const userAnswer = element.value.trim().toLowerCase();
+            const correct = correctAnswer.toLowerCase();
+
+            feedback.classList.add('show');
+            
+            if (userAnswer === correct) {
+                feedback.textContent = '✓ ¡Correcto!';
+                feedback.style.background = 'rgba(76, 175, 80, 0.2)';
+                feedback.style.color = '#2d5016';
+            } else {
+                feedback.textContent = `✗ Incorrecto. La respuesta correcta es: ${correctAnswer}`;
+                feedback.style.background = 'rgba(220, 53, 69, 0.15)';
+                feedback.style.color = '#721c24';
+            }
+        }
+
+        function resetExercises() {
+            document.querySelectorAll('input[type="text"]').forEach(input => input.value = '');
+            document.querySelectorAll('select').forEach(select => select.value = '');
+            document.querySelectorAll('.exercise-feedback').forEach(fb => {
+                fb.classList.remove('show');
+            });
+        }
+
+        // FINAL RESULT
+        function showFinalResult(section, correct, total) {
+            const percentage = Math.round((correct / total) * 100);
+            const resultDiv = document.getElementById('finalResult');
+            const resultText = document.getElementById('resultText');
+            const scoreDetails = document.getElementById('scoreDetails');
+
+            resultDiv.classList.add('show');
+            resultText.innerHTML = `<strong>Sección de ${section}:</strong> ${correct} de ${total} respuestas correctas`;
+            scoreDetails.innerHTML = `<div class="result-percentage">${percentage}%</div>`;
+
+            if (percentage === 100) {
+                scoreDetails.innerHTML += '<p>🌟 ¡Excelente! ¡Has dominado este tema!</p>';
+            } else if (percentage >= 80) {
+                scoreDetails.innerHTML += '<p>⭐ ¡Muy bien! Casi perfecto.</p>';
+            } else if (percentage >= 60) {
+                scoreDetails.innerHTML += '<p>👍 Buen trabajo. Sigue practicando.</p>';
+            } else {
+                scoreDetails.innerHTML += '<p>💪 Necesitas más práctica. ¡Vuelve a intentar!</p>';
+            }
+        }
+
+        // Focus on password input on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('passwordInput').focus();
+        });
+    </script>
+</body>
+</html>
