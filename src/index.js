@@ -1,33 +1,30 @@
 /**
  * 西語萌萌學園 GramBook
- * Cloudflare Worker 入口点
+ * Cloudflare Worker 入口點
  */
 
-// 课程密码配置（每个课程独立密码）
+// 課程密碼配置（每個課程獨立密碼）
 const LESSON_PASSWORDS = {
-  'elcumpleanos': 'YJL-95',      // El Cumpleaños de Lily
-  'lesson2': 'tu_password_aqui_2',           // 第二课
-  'lesson3': 'tu_password_aqui_3',           // 第三课
-  // 添加更多课程...
+  'elcumpleanos': 'YJL-95',
+  'llevar-llevarse': 'WNG-28',
 };
 
-// 课程元数据
+// 課程元資料
 const LESSONS_METADATA = {
   'elcumpleanos': {
-    name: '莉莉的生日',
+    name: 'Lily y sus gatos: Capítulo 1 - El cumpleaños',
     slug: 'elcumpleanos',
     level: 'A1',
     file: 'elcumpleanos01-protected.html',
     description: 'POD 和 POI 代詞練習'
   },
-  'lesson2': {
-    name: '第二课',
-    slug: 'lesson2',
+  'llevar-llevarse': {
+    name: '練習 Llevar o llevarse',
+    slug: 'llevar-llevarse',
     level: 'A2',
-    file: 'lesson2-protected.html',
-    description: '课程描述'
+    file: 'index.html',
+    description: '動詞 llevar 和 llevarse 的用法區別練習'
   },
-  // 添加更多元数据...
 };
 
 export default {
@@ -40,25 +37,25 @@ export default {
       return handleIndex();
     }
 
-    // API: 获取课程列表
+    // API: 取得課程列表
     if (pathname === '/api/lessons') {
       return handleLessonsAPI();
     }
 
-    // API: 验证密码
+    // API: 驗證密碼
     if (pathname === '/api/verify-password') {
       return handlePasswordVerification(request);
     }
 
-    // 动态课程路由
-    const lessonMatch = pathname.match(/^\/lessons\/([a-z0-9-]+)\/?$/i);
+    // 動態課程路由
+    const lessonMatch = pathname.match(/^\/lessons\/([a-z0-9\-]+)\/?$/i);
     if (lessonMatch) {
       const lessonSlug = lessonMatch[1].toLowerCase();
       return handleLesson(lessonSlug, request);
     }
 
     // 404
-    return new Response('404 - 页面未找到', { status: 404 });
+    return new Response('404 - 頁面未找到', { status: 404 });
   }
 };
 
@@ -161,6 +158,13 @@ function handleIndex() {
       color: #666;
     }
 
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #999;
+      font-size: 0.9em;
+    }
+
     @media (max-width: 600px) {
       .container {
         padding: 20px;
@@ -180,6 +184,12 @@ function handleIndex() {
     <div class="lessons-grid" id="lessonsContainer">
       <div class="loading">加載課程中...</div>
     </div>
+
+    <footer>
+      © 2026 西語萌萌學園 ✨ con Luz | 
+      <a href="https://instagram.com/luz_ranjyue" style="color: #667eea; text-decoration: none;">Instagram</a> |
+      <a href="https://discord.gg/XpJt7V8Yp" style="color: #667eea; text-decoration: none;">Discord</a>
+    </footer>
   </div>
 
   <script>
@@ -226,7 +236,7 @@ function handleIndex() {
 function handleLessonsAPI() {
   const lessons = Object.values(LESSONS_METADATA);
   return new Response(JSON.stringify(lessons), {
-    headers: { 'Content-Type': 'application/json' }
+    headers: { 'Content-Type': 'application/json; charset=utf-8' }
   });
 }
 
@@ -236,11 +246,9 @@ function handleLessonsAPI() {
 function handleLesson(slug, request) {
   const lesson = LESSONS_METADATA[slug];
   if (!lesson) {
-    return new Response('课程不存在', { status: 404 });
+    return new Response('課程不存在', { status: 404 });
   }
 
-  // 这里返回密码保护的 HTML
-  // 實際實現中，你需要從 Cloudflare R2 或其他存储读取 HTML 文件
   const html = `
 <!DOCTYPE html>
 <html lang="zh-TW">
@@ -249,9 +257,22 @@ function handleLesson(slug, request) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>\${lesson.name} - GramBook</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft JhengHei', sans-serif; }
-    
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft JhengHei', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
     .password-gate {
       display: flex;
       align-items: center;
@@ -265,7 +286,7 @@ function handleLesson(slug, request) {
       background: white;
       padding: 40px;
       border-radius: 12px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
       max-width: 400px;
       width: 100%;
     }
@@ -276,6 +297,13 @@ function handleLesson(slug, request) {
       text-align: center;
     }
 
+    .password-form p {
+      text-align: center;
+      color: #666;
+      margin-bottom: 20px;
+      font-size: 0.9em;
+    }
+
     .password-form input {
       width: 100%;
       padding: 12px;
@@ -283,6 +311,7 @@ function handleLesson(slug, request) {
       border-radius: 6px;
       font-size: 1em;
       margin-bottom: 20px;
+      font-family: inherit;
     }
 
     .password-form input:focus {
@@ -315,8 +344,21 @@ function handleLesson(slug, request) {
       font-size: 0.9em;
     }
 
+    .success {
+      color: #28a745;
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 0.9em;
+    }
+
     .lesson-content {
       display: none;
+    }
+
+    .lesson-iframe {
+      width: 100%;
+      height: 100vh;
+      border: none;
     }
   </style>
 </head>
@@ -324,8 +366,9 @@ function handleLesson(slug, request) {
   <div id="passwordGate" class="password-gate">
     <form class="password-form" onsubmit="verifyPassword(event)">
       <h2>\${lesson.name}</h2>
-      <p style="text-align: center; color: #666; margin-bottom: 20px;">請輸入密碼存取課程</p>
+      <p>請輸入密碼存取課程</p>
       <div id="errorMessage" class="error"></div>
+      <div id="successMessage" class="success"></div>
       <input 
         type="password" 
         id="passwordInput" 
@@ -338,16 +381,18 @@ function handleLesson(slug, request) {
   </div>
 
   <div id="lessonContent" class="lesson-content">
-    <!-- 這裡會加載實際課程內容 -->
+    <iframe id="contentFrame" class="lesson-iframe"></iframe>
   </div>
 
   <script>
     const lessonSlug = '\${slug}';
+    const lessonFile = '\${lesson.file}';
     
     async function verifyPassword(event) {
       event.preventDefault();
       const password = document.getElementById('passwordInput').value;
       const errorDiv = document.getElementById('errorMessage');
+      const successDiv = document.getElementById('successMessage');
       
       try {
         const response = await fetch('/api/verify-password', {
@@ -359,25 +404,42 @@ function handleLesson(slug, request) {
         const result = await response.json();
         
         if (result.success) {
-          // 密碼正確，顯示課程內容
-          document.getElementById('passwordGate').style.display = 'none';
-          document.getElementById('lessonContent').style.display = 'block';
-          // 這裡加載實際的課程 HTML 內容
-          loadLessonContent(lessonSlug);
+          successDiv.textContent = '密碼正確，正在載入課程...';
+          errorDiv.textContent = '';
+          setTimeout(() => {
+            document.getElementById('passwordGate').style.display = 'none';
+            document.getElementById('lessonContent').style.display = 'block';
+            loadLessonContent();
+          }, 500);
         } else {
           errorDiv.textContent = '密碼錯誤，請重試';
+          successDiv.textContent = '';
+          document.getElementById('passwordInput').value = '';
+          document.getElementById('passwordInput').focus();
         }
       } catch (error) {
         errorDiv.textContent = '驗證失敗，請稍後重試';
+        successDiv.textContent = '';
         console.error(error);
       }
     }
 
-    function loadLessonContent(slug) {
-      // 實作加載課程內容的邏輯
-      document.getElementById('lessonContent').innerHTML = 
-        '<p style="padding: 20px;">課程內容加載中...</p>';
+    function loadLessonContent() {
+      // 這裡可以加載課程 HTML 檔案
+      // 暫時顯示提示訊息
+      const iframe = document.getElementById('contentFrame');
+      // iframe.src = \`/content/\${lessonFile}\`;
+      
+      // 或者直接顯示提示
+      iframe.onload = function() {
+        console.log('課程已載入');
+      };
     }
+
+    // 自動載入課程內容
+    document.addEventListener('DOMContentLoaded', function() {
+      // 課程內容會通過 handleLesson 返回
+    });
   </script>
 </body>
 </html>
@@ -393,7 +455,7 @@ function handleLesson(slug, request) {
  */
 async function handlePasswordVerification(request) {
   if (request.method !== 'POST') {
-    return new Response('Method not allowed', { status: 405 });
+    return new Response('方法不允許', { status: 405 });
   }
 
   try {
@@ -401,8 +463,8 @@ async function handlePasswordVerification(request) {
     
     const correctPassword = LESSON_PASSWORDS[slug];
     if (!correctPassword) {
-      return new Response(JSON.stringify({ success: false, error: 'Lesson not found' }), 
-        { status: 404, headers: { 'Content-Type': 'application/json' } }
+      return new Response(JSON.stringify({ success: false, error: '課程不存在' }), 
+        { status: 404, headers: { 'Content-Type': 'application/json; charset=utf-8' } }
       );
     }
 
@@ -410,12 +472,12 @@ async function handlePasswordVerification(request) {
     
     return new Response(
       JSON.stringify({ success: isCorrect }),
-      { headers: { 'Content-Type': 'application/json' } }
+      { headers: { 'Content-Type': 'application/json; charset=utf-8' } }
     );
   } catch (error) {
     return new Response(
       JSON.stringify({ success: false, error: error.message }),
-      { status: 400, headers: { 'Content-Type': 'application/json' } }
+      { status: 400, headers: { 'Content-Type': 'application/json; charset=utf-8' } }
     );
   }
 }
