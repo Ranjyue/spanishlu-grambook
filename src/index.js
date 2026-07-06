@@ -5,7 +5,7 @@
 
 // 课程密码配置（每个课程独立密码）
 const LESSON_PASSWORDS = {
-  'elcumpleanos': 'tu_password_aqui_1',      // El Cumpleaños de Lily
+  'elcumpleanos': 'YJL-95',      // El Cumpleaños de Lily
   'lesson2': 'tu_password_aqui_2',           // 第二课
   'lesson3': 'tu_password_aqui_3',           // 第三课
   // 添加更多课程...
